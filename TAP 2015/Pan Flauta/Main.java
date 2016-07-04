@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 
@@ -47,7 +48,7 @@ public class Main {
 	public static boolean esValorMinimo (int l, int n, long min) {
 		int inicio=0,fin;
 		for (int i=1; i<=n; i++) {
-			fin = buscarValor (inicio,inicio+1,l,min);
+			fin = buscarValor (calcularCuadrado (inicio),inicio+1,l,min);
 			if (fin==-1 || (l-fin)<(n-i))
 				return false;
 			inicio = fin;
@@ -55,27 +56,27 @@ public class Main {
 		return true;
 	}
 
-	public static int buscarValor (int i, int f, int f2, long v) {
+	public static int buscarValor (long offset, int f, int f2, long v) {
 		int medio = (int) ((f2-f)/2d);
-		long inicio = calcularCuadrado (i),actual,izquierda,derecha = calcularCuadrado (f2)-inicio;
+		long actual,izquierda,derecha = calcularCuadrado (f2)-offset;
 
 		if (derecha<v)
 			return -1;
 		if (f2==f)
 			return f;
 		if (f2-f==1) {
-			izquierda  = calcularCuadrado (f)-inicio;
+			izquierda  = calcularCuadrado (f)-offset;
 			if (izquierda>=v)
 				return f;
 			return f2;
 		}
-		actual = calcularCuadrado (f+medio)-inicio;
+		actual = calcularCuadrado (f+medio)-offset;
 		if (actual==v)
 			return f+medio;
 		else if (actual<v)
-			return buscarValor (i,f+medio+1,f2,v);
+			return buscarValor (offset,f+medio+1,f2,v);
 		else
-			return buscarValor (i,f,f+medio,v);
+			return buscarValor (offset,f,f+medio,v);
 	}
 
 	public static long calcularCuadrado (int i) {
