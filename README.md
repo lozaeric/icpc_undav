@@ -2,7 +2,7 @@
 Este repositorio posee ejercicios resueltos e información útil sobre el International Collegiate Programming Contest.
 
 ## Links útiles
-* Página oficial: https://icpc.baylor.edu
+* Página oficial del ICPC: https://icpc.baylor.edu
   * Reglas: https://icpc.baylor.edu/regionals/rules  
   * Torneo Argentino de Programación 2016: https://icpc.baylor.edu/regionals/finder/tap-2016
 * Problemas de competencias pasadas y jueces online: 
