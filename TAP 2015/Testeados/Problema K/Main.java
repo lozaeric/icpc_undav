@@ -154,29 +154,20 @@ public class Main {
 		}
 		
 		  public int update_point(int p, int L, int R, int idx, int new_value) {
-			    // this update code is still preliminary, i == j
-			    // must be able to update range in the future!
 			    int i = idx, j = idx;
 
-			    // if the current interval does not intersect 
-			    // the update interval, return this st node value!
 			    if (i > R || j < L)
 			      return st[p];
 
-			    // if the current interval is included in the update range,
-			    // update that st[node]
 			    if (L == i && R == j) {
-			      a[i] = new_value; // update the underlying array
-			      return st[p] = L; // this index
+			      a[i] = new_value; 
+			      return st[p] = L; 
 			    }
 
-			    // compute the minimum pition in the 
-			    // left and right part of the interval
 			    int p1, p2;
 			    p1 = update_point(left(p) , L              , (L + R) / 2, idx, new_value);
 			    p2 = update_point(right(p), (L + R) / 2 + 1, R          , idx, new_value);
 
-			    // return the pition where the overall minimum is
 			    return st[p] = (a[p1] >= a[p2]) ? p1 : p2;
 			  }
 	}
