@@ -9,4 +9,5 @@ Este repositorio posee ejercicios resueltos e información útil sobre el Intern
   * http://caloventorendos.blogspot.com.ar/2015/11/solucionario-tap-2015.html
   * https://icpcarchive.ecs.baylor.edu
   * http://coj.uci.cu/index.xhtml
+* Código fuente de Estructuras y Algoritmos: http://cpbook.net/#downloads
 * Material de Lectura Importante: https://github.com/haseebr/competitive-programming/tree/master/Materials
