@@ -5,9 +5,11 @@ Este repositorio posee ejercicios resueltos e información útil sobre el Intern
 * Página oficial del ICPC: https://icpc.baylor.edu
   * Reglas: https://icpc.baylor.edu/regionals/rules  
   * Torneo Argentino de Programación 2016: https://icpc.baylor.edu/regionals/finder/tap-2016
-* Problemas de competencias pasadas y jueces online: 
-  * http://caloventorendos.blogspot.com.ar/2015/11/solucionario-tap-2015.html
+* Problemas y jueces online: 
+  * http://torneoprogramacion.com.ar/problemas-de-ediciones-anteriores/
   * https://icpcarchive.ecs.baylor.edu
+  * http://www.spoj.com/
   * http://coj.uci.cu/index.xhtml
+  * https://uva.onlinejudge.org/
 * Código fuente de Estructuras y Algoritmos: http://cpbook.net/#downloads
 * Material de Lectura Importante: https://github.com/haseebr/competitive-programming/tree/master/Materials
