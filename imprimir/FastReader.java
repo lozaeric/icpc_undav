@@ -3,6 +3,16 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
+/*
+
+import java.io.*;
+import java.util.*;
+PrintWriter printer = new PrintWriter(System.out);
+printer.println("Hola mundo");
+printer.close();
+
+*/
+
 class FastReader
    {
        BufferedReader br;

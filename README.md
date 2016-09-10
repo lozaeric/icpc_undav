@@ -1,5 +1,5 @@
 # BlackRock
-# Ingeniería en Informática - Universidad Nacional de Avellaneda
+# Universidad Nacional de Avellaneda
 
  * Página oficial del ICPC: https://icpc.baylor.edu
    * Reglas: https://icpc.baylor.edu/regionals/rules
@@ -11,5 +11,6 @@
    * http://www.spoj.com/
    * http://coj.uci.cu/index.xhtml
    * https://uva.onlinejudge.org/
- * Código fuente de Estructuras y Algoritmos: http://cpbook.net/#downloads
- * Material de Lectura Importante: https://github.com/haseebr/competitive-programming/tree/master/Materials
+ * Código fuente y Slides sobre Estructuras y Algoritmos:
+   * http://cpbook.net/#downloads
+   * https://sites.google.com/site/trainingcampargentina2016/home/clases-teoricas
