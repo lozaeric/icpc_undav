@@ -18,16 +18,14 @@ public class D {
 		}
 	}
 	
-	// Function to print the divisors
 	static int getDivisors(int a, int b, int n, int d)
 	{
 	    int min = Integer.MAX_VALUE;
 	    
-	    for (int i=1; i<=Math.sqrt(n)+1; i++)
+	    for (int i=1; i<=Math.sqrt(n); i++)
 	    {
 	        if (n%i==0)
 	        {
-	            // If divisors are equal, print only one
 	            if (n/i == i && i%a==0 && i%b!=0 && d%i!=0)
 	                min = Math.min (min, i);
 	            else {
