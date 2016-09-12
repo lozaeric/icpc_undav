@@ -51,11 +51,9 @@ public class Main2 {
 		}
 
 		public int compareTo (Par o) {
-	      if (d<o.d)
-	      	return 1;
-	      else if (d>o.d)
-	      	return -1;
-	      return 0;
+			if (d==o.d)
+				return 0;
+	      return d<o.d? -1:1;
       }
 	}
 }
