@@ -1,5 +1,4 @@
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class FloydWarshall {
@@ -25,28 +24,11 @@ public class FloydWarshall {
 	static int fw () {
 		int max = -1;
 		
-		//floyd warshall - minimax
+		//floyd warshall minimax
 		for (int k = 0; k < matAdy.length; k++)
 			for (int i = 0; i < matAdy.length; i++)
 				for (int j = 0; j < matAdy.length; j++)
 					matAdy[i][j] = Math.min(matAdy[i][j], Math.max(matAdy[i][k],matAdy[k][j]));
-		for (int i = 0; i < matAdy.length; i++) {
-			for (int j = i+1; j < matAdy.length; j++) {
-				if (max<matAdy[i][j])
-					max = matAdy[i][j];
-			}
-		}
-		return max;
-	}
-	
-	static int fw2 () {
-		int max = -1;
-		
-		//floyd warshall - maximin
-		for (int k = 0; k < matAdy.length; k++)
-			for (int i = 0; i < matAdy.length; i++)
-				for (int j = 0; j < matAdy.length; j++)
-					matAdy[i][j] = i==j? 0:Math.max(matAdy[i][j], Math.max(matAdy[i][k],matAdy[k][j]));
 		for (int i = 0; i < matAdy.length; i++) {
 			for (int j = i+1; j < matAdy.length; j++) {
 				if (max<matAdy[i][j])
