@@ -1,53 +1,63 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.PriorityQueue;
+import java.util.Scanner;
 
-public class MaxFlow {
+
+class MaxFlow {
+	static final int  INF = 1<<29;
+	
 	public static void main (String[] args) {
-		Grafo g = new Grafo(5,0,1);
+		Grafo g = new Grafo (100,0,1);
+		g.setEdge(0, 2, 70);
+		g.setEdge(0, 3, 20);
+		g.setEdge(0, 3, 10);
+		g.setEdge(1, 2, 25);
+		g.setEdge(1, 3, 70);
+		g.setEdge(2, 0, 70);
+		g.setEdge(2, 3, 5);
+		g.setEdge(2, 1, 25);
+		g.setEdge(3, 0, 30);
+		g.setEdge(3, 2, 5);
+		g.setEdge(3, 1, 70);
+		System.out.println (g.maxFlow());
 		
-		g.setEdge(0, 2, 100);
-		g.setEdge(0, 3, 50);
-		//g.setEdge(2, 3, 50);
-		g.setEdge(2, 4, 5);
-		g.setEdge(3, 4, 100);
-		g.setEdge(4, 1, 125);
-		g.setEdge(2, 1, 5);
-		
-		System.out.println (g.maxFlow ());
 	}
-
+	
+	
 	static class Grafo {
 		int mf,f,s,p[],res[][],t;
-		HashMap<Integer, ArrayList<Integer>> lisAdy = new HashMap<Integer, ArrayList<Integer>> ();
+		static HashMap<Integer, ArrayList<Integer>> lisAdy = new HashMap<Integer, ArrayList<Integer>> ();
 		
 		public Grafo (int n, int s, int t) {
 			res = new int[n][n];
 			p = new int[n];
-			this.s = s;
-			this.t = t;
 			for (int i=0; i<n; i++)
 				lisAdy.put(i, new ArrayList<Integer> ());
+			this.s = s;
+			this.t = t;
 		}
+		
 		
 		public void setEdge (int i, int j, int c) {
 			res[i][j] += c;
-			//res[j][i] += c;
-			if (!lisAdy.get(i).contains(j))
+			if (!lisAdy.get(i).contains (j))
 				lisAdy.get(i).add(j);
-			//if (!lisAdy.get(j).contains(i))
-				//lisAdy.get(j).add(i);
 		}
 		
 		public int maxFlow () {
-			PriorityQueue<Integer> q = new PriorityQueue<Integer> ();
+			ArrayDeque<Integer> q  = new ArrayDeque<Integer> ();
 			boolean visitados[];
 			int u;
 			
-			do {
+			mf = 0;
+			while (true) {
 				f = 0;
-				visitados = new boolean [res.length];
+				visitados = new boolean[res.length];
 				Arrays.fill (p, -1);
 				q.add (s);
 				visitados[s] = true;
@@ -55,20 +65,20 @@ public class MaxFlow {
 					u = q.remove ();
 					if (u==t)
 						break;
-					for (int vec : lisAdy.get(u)) {
-						if(res[u][vec]>0 && !visitados[vec]) {
-							visitados[vec] = true;
-							q.add (vec);
-							p[vec] = u;
+					for (int v : lisAdy.get(u)) {
+						if(res[u][v]>0 && !visitados[v]) {
+							visitados[v] = true;
+							q.add (v);
+							p[v] = u;
 						}
 					}
 				}
-				augment(t,1000000);
+				augment(t,INF);
 				if (f==0)
 					break;
 				mf += f;
 				q.clear();
-			} while (true);
+			} 
 			return mf;
 		}
 		
@@ -77,14 +87,12 @@ public class MaxFlow {
 				f = minEdge;
 				return;
 			}
-			else if (p[v]!=-1) {
+			else if (p[v]!=-1) { 
 				augment(p[v],Math.min (minEdge, res[p[v]][v]));
 				res[p[v]][v] -= f;
 				res[v][p[v]] += f;
-				if (!lisAdy.get(v).contains(p[v]))
+				if (!lisAdy.get(v).contains (p[v]))
 					lisAdy.get(v).add(p[v]);
-				//if (!lisAdy.get(p[v]).contains(v))
-					//lisAdy.get(p[v]).add(v);
 			}
 		}
 	}

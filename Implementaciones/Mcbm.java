@@ -1,99 +1,62 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Scanner;
 
 
-class Mcbm {
-	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-	static final int  INF = 1<<29;
+public class Mcbm {
 	
 	public static void main (String[] args) {
-		Grafo g = new Grafo (100,0,1);
-		g.setEdge(0, 2, 70);
-		g.setEdge(0, 3, 30);
-		g.setEdge(1, 2, 25);
-		g.setEdge(1, 3, 70);
-		g.setEdge(2, 0, 70);
-		g.setEdge(2, 3, 5);
-		g.setEdge(2, 1, 25);
-		g.setEdge(3, 0, 30);
-		g.setEdge(3, 2, 5);
-		g.setEdge(3, 1, 70);
-		System.out.println (g.maxFlow());
-		
+		int n = 5;
+		Grafo g = new Grafo (n);
+		g.setEdge(0, 2);
+		g.setEdge(0, 3);
+		g.setEdge(0, 4);
+		g.setEdge(1, 2);
+		g.setEdge(1, 3);
+		g.setEdge(1, 4);
+		int mbcm = g.mcbm(), mis = n-mbcm;
+		System.out.println ("MCBM y MVC = "+mbcm);
+		System.out.println ("MIS = "+mis);
 	}
 	
-	
 	static class Grafo {
-		int mf,f,s,p[],res[][],t;
 		static HashMap<Integer, ArrayList<Integer>> lisAdy = new HashMap<Integer, ArrayList<Integer>> ();
+		static boolean visitados[];
+		static int match[];
 		
-		public Grafo (int n, int s, int t) {
-			res = new int[n][n];
-			p = new int[n];
-			for (int i=0; i<n; i++)
+		public Grafo (int n) {
+			visitados = new boolean[n];
+			match = new int[n];
+			for (int i=0; i<n; i++) {
 				lisAdy.put(i, new ArrayList<Integer> ());
-			this.s = s;
-			this.t = t;
+				match[i] = -1;
+			}
 		}
 		
-		
-		public void setEdge (int i, int j, int c) {
-			res[i][j] = c;
-			if (!lisAdy.get(i).contains (j))
-				lisAdy.get(i).add(j);
+		void setEdge (int i, int j) {
+			lisAdy.get(i).add(j);
 		}
 		
-		public int maxFlow () {
-			ArrayDeque<Integer> q  = new ArrayDeque<Integer> ();
-			boolean visitados[];
-			int u;
+		int mcbm () {
+			int cont = 0, v = visitados.length;
 			
-			mf = 0;
-			while (true) {
-				f = 0;
-				visitados = new boolean[res.length];
-				Arrays.fill (p, -1);
-				q.add (s);
-				visitados[s] = true;
-				while (!q.isEmpty ()) {
-					u = q.remove ();
-					if (u==t)
-						break;
-					for (int v : lisAdy.get(u)) {
-						if(res[u][v]>0 && !visitados[v]) {
-							visitados[v] = true;
-							q.add (v);
-							p[v] = u;
-						}
-					}
-				}
-				augment(t,INF);
-				if (f==0)
-					break;
-				mf += f;
-				q.clear();
-			} 
-			return mf;
+			for (int i=0; i<v; i++) {
+				cont += aug(i);
+				visitados = new boolean[v];
+			}
+			return cont;
 		}
 		
-		public void augment (int v, int minEdge) {
-			if (v==s) {
-				f = minEdge;
-				return;
+		private int aug (int i) {
+			if (visitados[i])
+				return 0;
+			visitados[i] = true;
+			for (int vec : lisAdy.get(i)) {
+				if (match[vec]==-1 || aug(match[vec])>0) {
+					match[vec] = i;
+					return 1;
+				}
 			}
-			else if (p[v]!=-1) { 
-				augment(p[v],Math.min (minEdge, res[p[v]][v]));
-				res[p[v]][v] -= f;
-				res[v][p[v]] += f;
-				if (!lisAdy.get(v).contains (p[v]))
-					lisAdy.get(v).add(p[v]);
-			}
+			return 0;
 		}
 	}
 }
