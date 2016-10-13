@@ -38,6 +38,22 @@ public class FloydWarshall {
 		return max;
 	}
 	
+	static int fw2 () {
+		int min = 1000000;
+		
+		//floyd warshall maximin
+		for (int k = 0; k < matAdy.length; k++)
+			for (int i = 0; i < matAdy.length; i++)
+				for (int j = 0; j < matAdy.length; j++)
+					matAdy[i][j] = Math.max(matAdy[i][j], Math.min(matAdy[i][k],matAdy[k][j]));
+		for (int i = 0; i < matAdy.length; i++) {
+			for (int j = i+1; j < matAdy.length; j++) {
+				if (min>matAdy[i][j])
+					min = matAdy[i][j];
+			}
+		}
+		return min;
+	}
 	
 	static int lcs (char a[], char b[]) {
 		int cr[] = new int [b.length+1], lr[] = new int [b.length+1];
