@@ -2,17 +2,17 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Stree {
+public class SArray {
 	public static void main(String[] args) {
 		Scanner in = new Scanner (System.in);
 		String ss = in.next(), pp = in.next();
-		SuffixTree tree = new SuffixTree (ss.toCharArray());
+		SuffixArray tree = new SuffixArray (ss.toCharArray());
 		int ans[] = tree.stringMatching(pp.toCharArray());
 		System.out.print(ans[0]+" "+ans[1]);
 	}
 
 	
-	static class SuffixTree {
+	static class SuffixArray{
 		char T[];                        // the input string, up to 100K characters
 		int n;                                             // the length of input string
 		//char P[];     // the pattern string (for string matching)
@@ -21,7 +21,7 @@ public class Stree {
 		int[] SA, tempSA;         // suffix array and temporary suffix array
 		int[] c;                                         // for counting/radix sort
 		
-		public SuffixTree  (char T[]) {
+		public SuffixArray  (char T[]) {
 			this.T = T;
 			n = T.length;
 			RA = new int[100010];
