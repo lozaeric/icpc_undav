@@ -3,6 +3,19 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
+
+/*
+	PrintWriter out = new PrintWriter(System.out);
+	out.println  ("Hola");
+	out.flush ();
+____________________________________________________
+
+	StringBuilder out = new StringBuilder  ();
+	out.append("Hola").append("\n");
+	System.out.print (out);
+*/
+
+
 class FastReader {
     BufferedReader br;
     StringTokenizer st;
