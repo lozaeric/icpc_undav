@@ -9,8 +9,7 @@ import java.util.Stack;
 
 public class Grafo{
 	private static HashMap<Integer, ArrayList<Integer>> listaAdy = new HashMap<Integer, ArrayList<Integer>> () ;
-	private static BitSet visitados = new BitSet(5);
-	private static int distancias[] = new int [5];
+	private static int n = 5;
 	
 	public static void main (String[] args) {
 		Scanner in = new Scanner(System.in);
@@ -33,25 +32,25 @@ public class Grafo{
 		ly = new ArrayList<Integer>();
 		listaAdy.put (4, ly);
 		
-		dfs(1);
+		dfs(0);
 		System.out.println ();
-		visitados.clear ();
-		bfs(1);
+		bfs(0);
 	}
 	
 	public static void dfs (int v) {
-		Stack <Integer> pila = new Stack <Integer> ();
-		Integer actual;
+		ArrayDeque <Integer> pila = new ArrayDeque <Integer> ();
+		int actual;
+		boolean visitados[] = new boolean[n];
 		
 		pila.add (v);
-		visitados.set (v);
+		visitados[v] = true;
 		do  {
 			actual = pila.pop ();
 			System.out.println (actual);
-			for (int n : listaAdy.get (actual)) {
-				if (!visitados.get (n)) {
-					pila.push (n);
-					visitados.set (n);
+			for (int vec : listaAdy.get (actual)) {
+				if (!visitados[vec]) {
+					pila.push (vec);
+					visitados[vec] = true;
 				}
 			}
 			
@@ -61,19 +60,20 @@ public class Grafo{
 	
 	public static void bfs (int v) {
 		ArrayDeque <Integer> cola = new ArrayDeque <Integer> ();
-		Integer actual;
+		int actual, distancias[] = new int [n];
+		boolean visitados[] = new boolean[n];
 		
 		cola.add (v);
-		visitados.set (v);
+		visitados[v] = true;
 		distancias[v] = 0;
 		do  {
-			actual = cola.remove ();
+			actual = cola.remove();
 			System.out.println (actual);
-			for (int n : listaAdy.get (actual)) {
-				if (!visitados.get (n)) {
-					cola.add (n);
-					distancias[n] = distancias[actual]+1;
-					visitados.set (n);
+			for (int vec : listaAdy.get (actual)) {
+				if (!visitados[vec]) {
+					cola.add (vec);
+					visitados[vec] = true;
+					distancias[vec] = distancias[actual]+1;
 				}
 			}
 			

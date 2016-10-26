@@ -65,23 +65,6 @@ public class StLazy {
 			updateRange (1, 0, n-1, i, j, diff);
 		}
 		
-		private void update_point(int p, int L, int R, int idx, int new_value) {
-			   if (idx > R || idx < L)
-			      return;
-			   if (L == idx && R == idx) {
-			      st[p] = new_value; 
-			      return;
-			   }
-
-			   update_point(left(p) , L, getMid(L,R), idx, new_value);
-			   update_point(right(p), getMid(L,R) + 1, R , idx, new_value);
-			   st[p] = Math.max(st[left(p)], st[right(p)]);
-		}
-		  
-		void update_point(int idx, int new_value) {
-			update_point(1, 0, n - 1, idx, new_value); 
-		}
-		
 		int rmq (int i, int j) {
 			return rmq(1,0,n-1,i,j);
 		}
