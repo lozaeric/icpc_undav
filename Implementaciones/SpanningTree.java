@@ -32,19 +32,21 @@ public class SpanningTree {
 				minCosto += e.w;
 				set.union (e.i, e.j);
 			}
+			if (set.count==1)
+				break;
 		}
 		DecimalFormat d = new DecimalFormat("0.00");
       System.out.println (d.format (minCosto/10d));
 	}
 	
 	public static class DisjointSet {
-	    public int[] parent, sizes;
+	    int[] parent;
+	    int count;
 	    
 	    public DisjointSet(int n)
 	    {
 	        parent = new int [n];
-	        sizes = new int [n];
-	        Arrays.fill (sizes, 1);
+	        count = n;
 	        for(int i = 0; i < n; i++)
 	            parent[i] = i;
 	    }
@@ -56,9 +58,6 @@ public class SpanningTree {
 	        return parent[i];
 	    }
 	    
-	    public int getSize (int i) {
-	   	 return sizes[find(i)];
-	    }
 	    
 	    public boolean isSameSet (int x, int y) {
 	   	 return find(x)==find(y);
@@ -69,8 +68,7 @@ public class SpanningTree {
 	        int x_root = find(x), y_root = find(y);
 	        if (x_root != y_root) {
 	            parent[y_root] = x_root;
-	            sizes[x_root] += sizes[y_root];
-	            sizes[y_root] = 0;
+	            count--;
 	        }
 	    }
 	}
