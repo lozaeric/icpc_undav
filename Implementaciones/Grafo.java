@@ -1,10 +1,7 @@
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.BitSet;
 import java.util.HashMap;
-import java.util.Scanner;
-import java.util.Stack;
 
 
 public class Grafo{
@@ -12,8 +9,6 @@ public class Grafo{
 	private static int n = 5;
 	
 	public static void main (String[] args) {
-		Scanner in = new Scanner(System.in);
-		
 		ArrayList<Integer> ly = new ArrayList<Integer>();
 		ly.add (1);
 		listaAdy.put (0, ly);
@@ -32,8 +27,9 @@ public class Grafo{
 		ly = new ArrayList<Integer>();
 		listaAdy.put (4, ly);
 		
+		System.out.println ("dfs");
 		dfs(0);
-		System.out.println ();
+		System.out.println ("bfs");
 		bfs(0);
 	}
 	

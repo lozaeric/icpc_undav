@@ -1,30 +1,25 @@
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Scanner;
 
 public class CheckBipartite {
 	static HashMap<Integer, ArrayList<Integer>> lisAdy = new HashMap<Integer, ArrayList<Integer>> () ;
 	static int n,e;
 	
 	public static void main (String[] args) {
-		Scanner in = new Scanner (System.in);
-		while (in.hasNext()) {
-			n = in.nextInt();
-			if (n==0)
-				return;
-			for (int i=0; i<n; i++)
-				lisAdy.put(i, new ArrayList<Integer> ());
-			while (in.hasNext()) {
-				int a = in.nextInt()-1, b = in.nextInt()-1;
-				if (a==-1 && b==-1)
-					break;
-				lisAdy.get(a).add (b);
-				lisAdy.get(b).add (a);
-			}
-			System.out.println (esBipartito ());
-			lisAdy.clear();
-		}
+		n = 5;
+		for (int i=0; i<n; i++)
+			lisAdy.put(i, new ArrayList<Integer> ());
+		lisAdy.get(0).add (1);
+		lisAdy.get(1).add (0);
+		lisAdy.get(1).add (2);
+		lisAdy.get(2).add (1);
+		lisAdy.get(2).add (3);
+		lisAdy.get(3).add (2);
+		lisAdy.get(3).add (4);
+		lisAdy.get(4).add (3);
+		System.out.println (esBipartito ());
 	}
 	
 	static String esBipartito () {
@@ -45,6 +40,7 @@ public class CheckBipartite {
 			}
 			
 		} while (!cola.isEmpty ());
+		System.out.println (Arrays.toString(colores));
 		return "YES";
 	}
 }

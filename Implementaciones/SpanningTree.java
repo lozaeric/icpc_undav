@@ -1,30 +1,21 @@
-import java.text.DecimalFormat;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.Scanner;
 
 
 public class SpanningTree {
 	public static void main (String[] args) {
-		Scanner in = new Scanner(System.in);
-		int n = in.nextInt ();
+		int n = 5, minCosto = 0;
 		ArrayList<Edge> edges = new ArrayList<Edge>();
 		DisjointSet set = new DisjointSet(n);;
-		double minCosto = 0;
-		int puntos[][]=new int[n][2];
 		
-		for (int i=0; i<n; i++) {
-			puntos[i][0] = (int) (in.nextDouble ()*10);
-			puntos[i][1] = (int) (in.nextDouble ()*10);
-			
-			for (int j=i-1; j>=0; j--) {
-				if (puntos[i][0]!=puntos[j][0] || puntos[i][1]!=puntos[j][1])
-					edges.add (new Edge (i,j, Math.hypot (puntos[i][0]-puntos[j][0],puntos[i][1]-puntos[j][1])));
-				else
-					set.union (i, j);
-			}
-		}
+		edges.add(new Edge (1,3,3));
+		edges.add(new Edge (1,2,2));
+		edges.add(new Edge (2,0,6));
+		edges.add(new Edge (2,3,7));
+		edges.add(new Edge (1,4,6));
+		edges.add(new Edge (3,4,5));
+		edges.add(new Edge (0,4,1));
 		
 		Collections.sort (edges);
 		for (Edge e : edges) {
@@ -35,8 +26,7 @@ public class SpanningTree {
 			if (set.count==1)
 				break;
 		}
-		DecimalFormat d = new DecimalFormat("0.00");
-      System.out.println (d.format (minCosto/10d));
+        System.out.println (minCosto);
 	}
 	
 	public static class DisjointSet {
@@ -74,25 +64,16 @@ public class SpanningTree {
 	}
 	
 	public  static class Edge implements Comparable<Edge> {
-		public int i,j;
-		public double w;
+		public int i,j,w;
 
-		public Edge (int i, int j, double w) {
+		public Edge (int i, int j, int w) {
 			this.i = i;
 			this.w = w;
 			this.j = j;
 		}
 		
 		public int compareTo (Edge o) {
-	      if(w>o.w)
-	      	return 1;
-	      else if (w<o.w)
-	      	return -1;
-	      return 0;
+	     return w-o.w;
       }
-		
-		public String toString () {
-			return "["+i+","+j+"]="+w;
-		}
 	}
 }

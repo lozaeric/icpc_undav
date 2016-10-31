@@ -1,8 +1,5 @@
-import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Scanner;
 
 public class ArticulationpointBridge {
 	static HashMap<Integer, ArrayList<Integer>> lisAdy = new HashMap<Integer, ArrayList<Integer>> () ;
@@ -11,48 +8,37 @@ public class ArticulationpointBridge {
 	static boolean isArticulation[];
 	
 	public static void main (String[] args) {
-		Scanner in = new Scanner (System.in);
-		String numbers[];
-		
-		while (in.hasNext()) {
-			n = in.nextInt();
-			if (n==0)
-				return;
-			in.nextLine();
-			dfs_low = new int[n];
-			dfs_num = new int[n];
-			dfs_parent = new int[n];
-			isArticulation = new boolean[n];
-			dfsCount = bridges = 0;
-			for (int i=0; i<n; i++)
-				lisAdy.put(i, new ArrayList<Integer> ());
-			for (int i=0, o; i<=n; i++) {
-				numbers = in.nextLine().split(" ");
-				o = Integer.parseInt(numbers[0])-1;
-				if (o==-1)
-					break;
-				for (int j=1,b; j<numbers.length; j++) {
-					b = Integer.parseInt(numbers[j])-1;
-					lisAdy.get(o).add (b);
-					lisAdy.get(b).add (o);
-				}
+		n = 6;
+		dfs_low = new int[n];
+		dfs_num = new int[n];
+		dfs_parent = new int[n];
+		isArticulation = new boolean[n];
+		dfsCount = bridges = 0;
+		for (int i=0; i<n; i++)
+			lisAdy.put(i, new ArrayList<Integer> ());
+		lisAdy.get(0).add(1);
+		lisAdy.get(1).add(0);
+		lisAdy.get(1).add(2);
+		lisAdy.get(2).add(1);
+		lisAdy.get(1).add(4);
+		lisAdy.get(4).add(1);
+		lisAdy.get(3).add(4);
+		lisAdy.get(4).add(3);
+		lisAdy.get(4).add(5);
+		lisAdy.get(5).add(4);
+		for (int i=0; i<n; i++) {
+			if (dfs_num[i]==0) {
+				dfsRoot = i;
+				rootChildren = 0;
+				searchAPyB (i);
+				isArticulation[i] = rootChildren>1;
 			}
-			for (int i=0; i<n; i++) {
-				if (dfs_num[i]==0) {
-					dfsRoot = i;
-					rootChildren = 0;
-					searchAPyB (i);
-					isArticulation[i] = rootChildren>1;
-				}
-			}
-			int res = 0;
-			for (boolean b : isArticulation) {
-				if (b)
-					res++;
-			}
-			System.out.println (res);
-			lisAdy.clear();
 		}
+		for (int i=0; i<n; i++) {
+			if (isArticulation[i])
+				System.out.println (i+" is an articulation point");
+		}
+		System.out.println ("There is "+bridges+" bridges");
 	}
 	
 	static void searchAPyB (int u) {
