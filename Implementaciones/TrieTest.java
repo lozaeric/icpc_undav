@@ -9,13 +9,13 @@ public class TrieTest {
 		System.out.println (trie.find ("hell".toCharArray ()));
 		System.out.println (trie.startWith ("hell".toCharArray ()));
 		System.out.println (trie.find ("hella".toCharArray ()));
-		System.out.println (trie.find ("abc".toCharArray ()));	
+		System.out.println (trie.find ("abcd".toCharArray ()));	
 		System.out.println (trie.startWith ("ab".toCharArray ()));		
 	}
 	
 	
 	static class Trie {
-		HashMap<Integer, ArrayList<Edge>>  hijos = new HashMap<Integer, ArrayList<Edge>> ();
+		HashMap<Integer, int[]>  hijos = new HashMap<Integer, int[]> ();
 		ArrayList<Boolean> terminables;
 		int global_id = -1;
 		
@@ -35,7 +35,7 @@ public class TrieTest {
 			int nuevo=0;
 			for (int i=res[1],id=res[0]; i<palabra.length; i++) {
 				nuevo = crearNodo ();
-				hijos.get (id).add (new Edge (nuevo, palabra[i]));
+				hijos.get (id)[palabra[i]-'a'] = nuevo;
 				id = nuevo;
 			}
 			terminables.set (nuevo, true);
@@ -43,24 +43,22 @@ public class TrieTest {
 		
 		private int crearNodo () {
 			++global_id;
-			hijos.put (global_id, new ArrayList<Edge> (30));
+			hijos.put (global_id, new int[30]);
 			terminables.add (false);
 			return global_id;
 		}
+		
 		int[] last (char palabra[]) {
 			int id=0,index=0;
-			boolean sigue = true;
 			
-			for (int i=0; i<palabra.length && sigue; i++) {
-				sigue = false;
-				for (Edge e : hijos.get (id)) {
-					if (e.c==palabra[i])  {
-						sigue = true;
-						index = i+1;
-						id = e.id;
-						break;
-					}
+			for (int i=0,aux=0; i<palabra.length; i++) {
+				aux = hijos.get (id)[palabra[i]-'a'];
+				if (aux!=0) {
+					index = i+1;
+					id = aux;					
 				}
+				else
+					break;
 			}
 			return new int[] {id,index};			
 		}
@@ -73,14 +71,5 @@ public class TrieTest {
 			return last(palabra)[1]==palabra.length;
 		}		
 		
-	}
-	
-	static class Edge {
-		int id;
-		char c;
-		
-		public Edge (int id, char c) {
-			this.id = id; this.c = c;
-		}
 	}
 }
