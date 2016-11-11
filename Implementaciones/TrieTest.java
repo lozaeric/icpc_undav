@@ -8,8 +8,8 @@ public class TrieTest {
 		Trie trie = new Trie (p);
 		System.out.println (trie.find ("hell".toCharArray ()));
 		System.out.println (trie.startWith ("hell".toCharArray ()));
-		System.out.println (trie.find ("abc".toCharArray ()));
-		System.out.println (trie.startWith ("abc".toCharArray ()));	
+		System.out.println (trie.find ("hella".toCharArray ()));
+		System.out.println (trie.find ("abc".toCharArray ()));	
 		System.out.println (trie.startWith ("ab".toCharArray ()));		
 	}
 	
@@ -27,16 +27,16 @@ public class TrieTest {
 		}
 		
 		void add (char[] palabra) {
-			int v[] = last (palabra);
-			if (v[1]==palabra.length) {
-				terminables.set (v[0], true);
+			int res[] = last (palabra);
+			if (res[1]==palabra.length) {
+				terminables.set (res[0], true);
 				return;
 			}
 			int nuevo=0;
-			for (int i=v[1],n=v[0]; i<palabra.length; i++) {
+			for (int i=res[1],id=res[0]; i<palabra.length; i++) {
 				nuevo = crearNodo ();
-				hijos.get (n).add (new Edge (nuevo, palabra[i]));
-				n = nuevo;
+				hijos.get (id).add (new Edge (nuevo, palabra[i]));
+				id = nuevo;
 			}
 			terminables.set (nuevo, true);
 		}
@@ -66,7 +66,8 @@ public class TrieTest {
 		}
 		
 		boolean find (char palabra[]) {
-			return terminables.get (last(palabra)[0]);
+			int res[] = last(palabra);
+			return res[1]==palabra.length && terminables.get (res[0]);
 		}
 		boolean startWith (char palabra[]) {
 			return last(palabra)[1]==palabra.length;
@@ -80,10 +81,6 @@ public class TrieTest {
 		
 		public Edge (int id, char c) {
 			this.id = id; this.c = c;
-		}
-		
-		public String toString () {
-			return id+"-"+c;
 		}
 	}
 }
