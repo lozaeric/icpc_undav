@@ -1,58 +1,52 @@
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class FloydWarshall {
 	static int matAdy[][];
 	
 	public static void main (String[] args) {
-		Scanner in = new Scanner (System.in);
-		int n = in.nextInt();
-		
-		String ciudades[] = new String[n];
+		int n = 5;
 		matAdy = new int[n][n];
-		for (int i=0; i<n; i++) 
-			ciudades[i] = in.next();		
-		for (int i=0; i<n; i++)  {
-			char actual[] = ciudades[i].toCharArray();
-			for (int j=i+1; j<n; j++) {
-				matAdy[i][j] = matAdy[j][i] = 1+lcs (actual, ciudades[j].toCharArray());
-			}
-		}
-		System.out.println (fw ());
+		
+		for (int i=0; i<n; i++)  
+			for (int j=0; j<n; j++) 
+				matAdy[i][j] = 10000000; // minimax y classic  
+		   // matAdy[i][j] = 0;     // maximin
+		for (int i=0; i<n; i++)
+			matAdy[i][i] = 0;
+		matAdy[0][1] = 2; matAdy[0][2] = 1; matAdy[0][4] = 3;
+		matAdy[1][3] = 4;
+		matAdy[2][1] = 1; matAdy[2][4] = 1; matAdy[3][0] = 1;
+		matAdy[3][2] = 3; matAdy[3][4] = 5;
+		
+		for (int i=0; i<n; i++)
+			System.out.println (Arrays.toString (matAdy[i]));
+		System.out.println ();
+		fw_classic ();
+		for (int i=0; i<n; i++)
+			System.out.println (Arrays.toString (matAdy[i]));		
 	}
 	
-	static int fw () {
-		int max = -1;
-		
-		//floyd warshall minimax
+	static void fw_classic () {
+		for (int k = 0; k < matAdy.length; k++)
+			for (int i = 0; i < matAdy.length; i++)
+				for (int j = 0; j < matAdy.length; j++)
+					matAdy[i][j] = Math.min(matAdy[i][j], matAdy[i][k]+matAdy[k][j]);
+	}
+	
+	static void fw_minimax () {
 		for (int k = 0; k < matAdy.length; k++)
 			for (int i = 0; i < matAdy.length; i++)
 				for (int j = 0; j < matAdy.length; j++)
 					matAdy[i][j] = Math.min(matAdy[i][j], Math.max(matAdy[i][k],matAdy[k][j]));
-		for (int i = 0; i < matAdy.length; i++) {
-			for (int j = i+1; j < matAdy.length; j++) {
-				if (max<matAdy[i][j])
-					max = matAdy[i][j];
-			}
-		}
-		return max;
 	}
 	
-	static int fw2 () {
-		int min = 1000000;
-		
-		//floyd warshall maximin
+	static void fw_maximin () {
 		for (int k = 0; k < matAdy.length; k++)
 			for (int i = 0; i < matAdy.length; i++)
 				for (int j = 0; j < matAdy.length; j++)
 					matAdy[i][j] = Math.max(matAdy[i][j], Math.min(matAdy[i][k],matAdy[k][j]));
-		for (int i = 0; i < matAdy.length; i++) {
-			for (int j = i+1; j < matAdy.length; j++) {
-				if (min>matAdy[i][j])
-					min = matAdy[i][j];
-			}
-		}
-		return min;
 	}
 	
 	static int lcs (char a[], char b[]) {
