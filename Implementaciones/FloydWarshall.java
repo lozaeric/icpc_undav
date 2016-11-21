@@ -1,6 +1,4 @@
-
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class FloydWarshall {
 	static int matAdy[][];
@@ -9,12 +7,13 @@ public class FloydWarshall {
 		int n = 5;
 		matAdy = new int[n][n];
 		
-		for (int i=0; i<n; i++)  
-			for (int j=0; j<n; j++) 
-				matAdy[i][j] = 10000000; // minimax y classic  
-		   // matAdy[i][j] = 0;     // maximin
-		for (int i=0; i<n; i++)
-			matAdy[i][i] = 0;
+		for (int i=0; i<n; i++)  {
+			for (int j=0; j<n; j++) { 
+				if (i!=j)
+					matAdy[i][j] = 10000000; // minimax y classic  
+				// matAdy[i][j] = 0;     // maximin
+			}
+		}
 		matAdy[0][1] = 2; matAdy[0][2] = 1; matAdy[0][4] = 3;
 		matAdy[1][3] = 4;
 		matAdy[2][1] = 1; matAdy[2][4] = 1; matAdy[3][0] = 1;
