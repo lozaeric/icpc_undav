@@ -6,26 +6,15 @@ import java.util.PriorityQueue;
 
 public class Dijkstra {
 	static 	HashMap<Integer, ArrayList<Par>> lisAdy = new HashMap<Integer, ArrayList<Par>> ();
-	static int n=5;
+	static int n;
 	
 	public static void main (String[] args) {
-		for (int i=0; i<n; i++) 
-			lisAdy.put(i, new ArrayList<Par> ());
-		lisAdy.get(0).add(new Par(2,6));
-		lisAdy.get(2).add(new Par(0,6));
-		lisAdy.get(0).add(new Par(4,1));
-		lisAdy.get(4).add(new Par(0,1));
-		lisAdy.get(2).add(new Par(3,7));
-		lisAdy.get(3).add(new Par(2,7));
-		lisAdy.get(1).add(new Par(2,2));
-		lisAdy.get(2).add(new Par(1,2));
-		lisAdy.get(1).add(new Par(3,3));
-		lisAdy.get(3).add(new Par(1,3));
-		lisAdy.get(1).add(new Par(4,6));
-		lisAdy.get(4).add(new Par(1,6));
-		lisAdy.get(3).add(new Par(4,5));
-		lisAdy.get(4).add(new Par(3,5));    
-		dijkstra (2);
+		int inicio = 0;
+		// Grafo Dirigido o No Dirigido
+		// n -> cantidad de vertices
+		// lisAdy -> lista de adyacencia
+		// inicio -> vertice  
+		dijkstra (inicio);
 	}
 	
 	static void dijkstra (int inicio) {
@@ -50,7 +39,7 @@ public class Dijkstra {
 	      System.out.println (Arrays.toString (distancia));
 	}
 	
-	public static class Par implements Comparable<Par> {
+	static class Par implements Comparable<Par> {
 		public int d, v;
 		
 		public Par (int v, int d) {

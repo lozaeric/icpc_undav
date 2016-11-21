@@ -5,32 +5,17 @@ import java.util.HashMap;
 
 
 public class Grafo{
-	private static HashMap<Integer, ArrayList<Integer>> listaAdy = new HashMap<Integer, ArrayList<Integer>> () ;
-	private static int n = 5;
+	static HashMap<Integer, ArrayList<Integer>> listaAdy = new HashMap<Integer, ArrayList<Integer>> () ;
+	static int n;
 	
 	public static void main (String[] args) {
-		ArrayList<Integer> ly = new ArrayList<Integer>();
-		ly.add (1);
-		listaAdy.put (0, ly);
-		ly = new ArrayList<Integer>();
-		ly.add (0);
-		ly.add (2);
-		ly.add (3);
-		listaAdy.put (1, ly);
-		ly = new ArrayList<Integer>();
-		ly.add (1);
-		ly.add (3);
-		listaAdy.put (2, ly);
-		ly = new ArrayList<Integer>();
-		ly.add (4);
-		listaAdy.put (3, ly);
-		ly = new ArrayList<Integer>();
-		listaAdy.put (4, ly);
-		
-		System.out.println ("dfs");
-		dfs(0);
-		System.out.println ("bfs");
-		bfs(0);
+		int inicio = 0;
+		// Grafo No Dirigido o Dirigido
+		// n -> cantidad de vertices
+		// lisAdy -> lista de adyacencia
+		// inicio -> vertice
+		dfs(inicio);
+		bfs(inicio);
 	}
 	
 	public static void dfs (int v) {

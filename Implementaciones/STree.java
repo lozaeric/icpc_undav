@@ -4,19 +4,11 @@ public class STree {
 	public static void main (String[] args) {
 		int array[] = {1,5,7,9,11,53,0,5,1,78};
 		SegmentTree st  = new SegmentTree (array);
-		System.out.println (st.rmq(0, 1));
-		System.out.println (st.rmq(1, 3));
-		System.out.println (st.rmq(2, 4));
-		st.update_point(0, 10);
-		st.update_point(1, 200);
-		st.update_point(3, 100);
-		System.out.println (st.rmq(0, 1));
-		System.out.println (st.rmq(1, 3));
-		System.out.println (st.rmq(2, 4));
+		// actualiza elemento en O(log n)
 	}
 	
 	
-	static class SegmentTree { 
+	static class SegmentTree {  //suma,max,min en O(log n)
 		int st[], n;
 		
 		public SegmentTree (int values[]) {
@@ -31,7 +23,7 @@ public class STree {
 			else {
 				build(left(p), l, getMid(l,r), values);
 				build(right(p), getMid(l,r)+1, r, values);
-				st[p] = Math.max(st[left(p)], st[right(p)]);
+				st[p] = Math.max(st[left(p)], st[right(p)]);  // importante
 			}
 		}
 		
@@ -45,7 +37,7 @@ public class STree {
 
 			   update_point(left(p) , L, getMid(L,R), idx, new_value);
 			   update_point(right(p), getMid(L,R) + 1, R , idx, new_value);
-			   st[p] = Math.max(st[left(p)], st[right(p)]);
+			   st[p] = Math.max(st[left(p)], st[right(p)]);  // importante
 		}
 		  
 		void update_point(int idx, int new_value) {
@@ -58,13 +50,13 @@ public class STree {
 		
 		private int rmq(int p, int l, int r, int i, int j) {
 			if (i > r || j < l) 
-				return -1; 
+				return -1;    // importante
 			if (l>=i && r<=j)
 				return st[p];
 			
 			int p1 = rmq(left(p),l,getMid(l,r), i, j),
 			    p2 = rmq(right(p), getMid(l,r)+ 1, r, i, j);
-			return Math.max(p1, p2);
+			return Math.max(p1, p2);  // importante
 		}
 		
 		static int left (int p) {

@@ -4,6 +4,7 @@ public class FT {
 	public static void main (String[] args) {
 		int n[]={1,7,2,100};
 		FenwickTree ft = new FenwickTree (n.length);
+		//Importante: el rango de los indices en el FenwickTree es [1,n]
 		
 		for (int i=0; i<n.length; i++) 
 			ft.adjust(i+1, n[i]);
@@ -15,19 +16,19 @@ public class FT {
 	public static class FenwickTree {
 		int ft[];
 		
-		public FenwickTree (int n) { // shift
+		public FenwickTree (int n) { 
 			ft = new int [n+1];
 		}
 		static int LSOne (int s)  {
 			return s & (-s);
 		}
-		int rsq (int b) { // shift
+		int rsq (int b) { 
 			int sum=0;
 			for (int _b=b; _b>0; _b-=LSOne(_b))
 				sum += ft[_b];
 			return sum;
 		}
-		int rsq (int a,int b) { // shift
+		int rsq (int a,int b) { 
 			return rsq(b)-rsq(a-1);
 		}		
 		void adjust(int index, int diff) {

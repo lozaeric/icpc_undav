@@ -1,30 +1,10 @@
-import java.util.Arrays;
-
 public class FloydWarshall {
 	static int matAdy[][];
 	
 	public static void main (String[] args) {
-		int n = 5;
-		matAdy = new int[n][n];
-		
-		for (int i=0; i<n; i++)  {
-			for (int j=0; j<n; j++) { 
-				if (i!=j)
-					matAdy[i][j] = 10000000; // minimax y classic  
-				// matAdy[i][j] = 0;     // maximin
-			}
-		}
-		matAdy[0][1] = 2; matAdy[0][2] = 1; matAdy[0][4] = 3;
-		matAdy[1][3] = 4;
-		matAdy[2][1] = 1; matAdy[2][4] = 1; matAdy[3][0] = 1;
-		matAdy[3][2] = 3; matAdy[3][4] = 5;
-		
-		for (int i=0; i<n; i++)
-			System.out.println (Arrays.toString (matAdy[i]));
-		System.out.println ();
-		fw_classic ();
-		for (int i=0; i<n; i++)
-			System.out.println (Arrays.toString (matAdy[i]));		
+		// Grafo Dirigido o No Dirigido
+		// matAdy -> matriz de adyacencia  // Importante: minimax y classic, los ejes no existentes tienen peso INFINITO
+													  //				  maximin, los ejes no existentes tienen peso CERO
 	}
 	
 	static void fw_classic () {
@@ -48,6 +28,7 @@ public class FloydWarshall {
 					matAdy[i][j] = Math.max(matAdy[i][j], Math.min(matAdy[i][k],matAdy[k][j]));
 	}
 	
+	//longest common substring
 	static int lcs (char a[], char b[]) {
 		int cr[] = new int [b.length+1], lr[] = new int [b.length+1];
 		

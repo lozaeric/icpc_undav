@@ -7,10 +7,10 @@ public class Kmp {
 	
 	public static void main(String[] args) {
 		Scanner in = new Scanner (System.in);
-		s  = "abaaaaba".toCharArray();
-		p  = "aba".toCharArray();
+		s  = "abaaaaba".toCharArray(); // string
+		p  = "aba".toCharArray(); // pattern
 		preKmp ();
-		kmp ();
+		kmp (); // encuentro ocurrencias en O(len(s) + len(p))
 	}
 
 	

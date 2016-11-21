@@ -7,12 +7,7 @@ public class Mcbm {
 	public static void main (String[] args) {
 		int n = 5;
 		Grafo g = new Grafo (n);
-		g.setEdge(0, 2);
-		g.setEdge(0, 3);
-		g.setEdge(0, 4);
-		g.setEdge(1, 2);
-		g.setEdge(1, 3);
-		g.setEdge(1, 4);
+		// grafo dirigido y bipartito
 		int mbcm = g.mcbm(), mis = n-mbcm;
 		System.out.println ("MCBM y MVC = "+mbcm);
 		System.out.println ("MIS = "+mis);

@@ -6,6 +6,7 @@ public class TrieTest {
 	public static void main (String[] args) {
 		String p[] = new String[] {"hello","hallo","abc","good","goodie"};
 		Trie trie = new Trie (p);
+		// matcheo de prefijos o buscar palabra en diccionario
 		System.out.println (trie.find ("hell".toCharArray ()));
 		System.out.println (trie.startWith ("hell".toCharArray ()));
 		System.out.println (trie.find ("hella".toCharArray ()));

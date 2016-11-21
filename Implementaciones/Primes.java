@@ -1,37 +1,22 @@
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.Collections;
 
 
 class Primes {
-	static int sieveSize = 100;
+	static int sieveSize = 100; // calcula los primos menores o iguales a sieveSize
 	static ArrayList<Integer> primos = new ArrayList<Integer> ();
 	
-	
 	public static void main (String[] args) {
-		Scanner in = new Scanner(System.in);
 		sieve ();
-		int a=2184,b=2200,cont=0;
 		System.out.println (primos);
-		/*
-		for(int i=a; i<=b; i++) {
-			System.out.println (factoresPrimos(i));
-			for (int fp : factoresPrimos(i)) {
-				map.add (fp);
-			}
-		}/*
-		for(int i=a; i<=b; i++) {
-			for (int fp : factoresPrimos(i)) {
-				if (!map.contains (fp))
-					System.out.println ("hola "+i);
-			}
-		}
-		System.out.println ();*/
+		System.out.println ("67 es primo?\t"+esPrimo (67));
+		System.out.println ("Factores primos de 128\t"+factoresPrimos (128));
 	}
 	
-	public static int gcd(int a, int b) 
+	static int gcd(int a, int b) 
 	{ return b == 0 ? a : gcd(b, a % b); }
 	
-	public static int eulerPhi(int n) {
+	static int eulerPhi(int n) { // cantidad de coprimos de n que son menores
 		int id=0, pf = primos.get (id), ans=n;
 		while(pf*pf<=n) {
 			if(n%pf==0)
@@ -45,13 +30,13 @@ class Primes {
 		return ans;
 	}
 	
-	public static boolean esPrimo(int n) {
+	static boolean esPrimo(int n) {
 		if (n<=sieveSize)
-			return primos.contains(n);
+			return Collections.binarySearch (primos, n)>=0;
 		return factoresPrimos(n).size ()==1;
 	}
 	
-	public static void sieve () {
+	static void sieve () {
 		boolean np[] = new boolean[sieveSize+1];
 		np[0] = np[1] =  true;
 		long i,j;
@@ -67,7 +52,7 @@ class Primes {
 				primos.add(t);
 	}
 	
-	public static ArrayList<Integer> factoresPrimos(int n){
+	public static ArrayList<Integer> factoresPrimos(int n){ // TODOS los factores primos
 		ArrayList<Integer> factores = new ArrayList<Integer> ();
 		int id=0, pf = primos.get (id);
 		while(pf*pf<=n) {

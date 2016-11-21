@@ -7,15 +7,11 @@ public class SpanningTree {
 	public static void main (String[] args) {
 		int n = 5, minCosto = 0;
 		ArrayList<Edge> edges = new ArrayList<Edge>();
-		DisjointSet set = new DisjointSet(n);;
+		DisjointSet set = new DisjointSet(n);
 		
-		edges.add(new Edge (1,3,3));
-		edges.add(new Edge (1,2,2));
-		edges.add(new Edge (2,0,6));
-		edges.add(new Edge (2,3,7));
-		edges.add(new Edge (1,4,6));
-		edges.add(new Edge (3,4,5));
-		edges.add(new Edge (0,4,1));
+		// Grafo No Dirigido
+		// edges -> lista de ejes
+		// set -> componentes conexos actuales
 		
 		Collections.sort (edges);
 		for (Edge e : edges) {
@@ -23,10 +19,10 @@ public class SpanningTree {
 				minCosto += e.w;
 				set.union (e.i, e.j);
 			}
-			if (set.count==1)
+			if (set.count==1) // si hay un componente conexo , ya cubri todo el grafo
 				break;
 		}
-        System.out.println (minCosto);
+      System.out.println (minCosto);
 	}
 	
 	public static class DisjointSet {

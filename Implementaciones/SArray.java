@@ -5,6 +5,7 @@ public class SArray {
 	public static void main(String[] args) {
 		Scanner in = new Scanner (System.in);
 		String ss = in.next(), pp = in.next();
+		// existencia de pattern en string
 		SuffixArray tree = new SuffixArray (ss.toCharArray());
 		int ans[] = tree.stringMatching(pp.toCharArray());
 		System.out.print(ans[0]+" "+ans[1]);

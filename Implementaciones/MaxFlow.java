@@ -9,19 +9,9 @@ class MaxFlow {
 	static final int  INF = 1<<29;
 	
 	public static void main (String[] args) {
-		Grafo g = new Grafo (100,0,1);
-		g.setEdge(0, 2, 70);
-		g.setEdge(0, 3, 20);
-		g.setEdge(0, 3, 10);
-		g.setEdge(1, 2, 25);
-		g.setEdge(1, 3, 70);
-		g.setEdge(2, 0, 70);
-		g.setEdge(2, 3, 5);
-		g.setEdge(2, 1, 25);
-		g.setEdge(3, 0, 30);
-		g.setEdge(3, 2, 5);
-		g.setEdge(3, 1, 70);
-		System.out.println (g.maxFlow());
+		// Grafo Dirigido o No Dirigido
+		int n=2,source=0,sink=1;
+		Grafo g = new Grafo (n,source,sink); 
 		
 	}
 	
@@ -30,7 +20,7 @@ class MaxFlow {
 		int mf,f,s,p[],res[][],t;
 		static HashMap<Integer, ArrayList<Integer>> lisAdy = new HashMap<Integer, ArrayList<Integer>> ();
 		
-		public Grafo (int n, int s, int t) {
+		public Grafo (int n, int s, int t) { 
 			res = new int[n][n];
 			p = new int[n];
 			for (int i=0; i<n; i++)
@@ -40,13 +30,13 @@ class MaxFlow {
 		}
 		
 		
-		public void setEdge (int i, int j, int c) {
-			res[i][j] += c;
-			if (!lisAdy.get(i).contains (j))
-				lisAdy.get(i).add(j);
+		void setEdge (int i, int j, int c) {
+			res[i][j] = c;
+			lisAdy.get(i).add(j);
+			//res[j][i] = c;   lisAdy.get(j).add(i);   // no dirigido 
 		}
 		
-		public int maxFlow () {
+		int maxFlow () {
 			ArrayDeque<Integer> q  = new ArrayDeque<Integer> ();
 			boolean visitados[];
 			int u;
@@ -79,7 +69,7 @@ class MaxFlow {
 			return mf;
 		}
 		
-		public void augment (int v, int minEdge) {
+		private void augment (int v, int minEdge) {
 			if (v==s) {
 				f = minEdge;
 				return;
