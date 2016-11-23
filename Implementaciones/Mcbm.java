@@ -1,57 +1,50 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 
 public class Mcbm {
+	static HashMap<Integer, ArrayList<Integer>> lisAdy = new HashMap<Integer, ArrayList<Integer>> ();
+	static boolean visitados[];
+	static int match[],n;
 	
-	public static void main (String[] args) {
-		int n = 5;
-		Grafo g = new Grafo (n);
-		// grafo dirigido y bipartito
-		int mbcm = g.mcbm(), mis = n-mbcm;
-		System.out.println ("MCBM y MVC = "+mbcm);
-		System.out.println ("MIS = "+mis);
+	// Max cardinality bipartite matching
+	// O (V*E)
+	// matching en grafos bipartitos, max independent set, min vertex cover
+	
+	
+	public Mcbm (int n) {
+		for (int i=0; i<n; i++) 
+			lisAdy.put(i, new ArrayList<Integer> ());
+		this.n = n;
 	}
 	
-	static class Grafo {
-		static HashMap<Integer, ArrayList<Integer>> lisAdy = new HashMap<Integer, ArrayList<Integer>> ();
-		static boolean visitados[];
-		static int match[];
+	void addEdge (int i, int j) {
+		lisAdy.get(i).add(j);
+	}
+	
+	int mcbm () { //max matching = min vertext conver  //max independent set = n-mcbm
+		int cont = 0;
 		
-		public Grafo (int n) {
+		match = new int[n];
+		Arrays.fill (match, -1);
+		for (int i=0; i<n; i++) {
 			visitados = new boolean[n];
-			match = new int[n];
-			for (int i=0; i<n; i++) {
-				lisAdy.put(i, new ArrayList<Integer> ());
-				match[i] = -1;
-			}
+			cont += aug(i);
 		}
-		
-		void setEdge (int i, int j) {
-			lisAdy.get(i).add(j);
-		}
-		
-		int mcbm () {
-			int cont = 0, v = visitados.length;
-			
-			for (int i=0; i<v; i++) {
-				cont += aug(i);
-				visitados = new boolean[v];
-			}
-			return cont;
-		}
-		
-		private int aug (int i) {
-			if (visitados[i])
-				return 0;
-			visitados[i] = true;
-			for (int vec : lisAdy.get(i)) {
-				if (match[vec]==-1 || aug(match[vec])>0) {
-					match[vec] = i;
-					return 1;
-				}
-			}
+		return cont;
+	}
+	
+	private int aug (int i) {
+		if (visitados[i])
 			return 0;
+		visitados[i] = true;
+		for (int vec : lisAdy.get(i)) {
+			if (match[vec]==-1 || aug(match[vec])>0) {
+				match[vec] = i;
+				return 1;
+			}
 		}
+		return 0;
 	}
 }

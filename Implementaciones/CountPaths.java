@@ -1,35 +1,29 @@
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class CountPaths {
-	static HashMap<Integer, ArrayList<Integer>> lisAdy = new HashMap<Integer, ArrayList<Integer>> () ;
-	static int n, paths[];
-	static ArrayDeque<Integer> cola = new ArrayDeque<Integer> ();
+	static HashMap<Integer, ArrayList<Integer>> lisAdy;
+	static ArrayDeque<Integer> cola;
 	static boolean visitados[];
 	
-	public static void main (String[] args) {
-		int inicio = 0;
-		// Grafo Dirigido Aciclico (DAG)
-		// n -> cantidad de vertices
-		// lisAdy -> lista de adyacencia
-		// inicio -> vertice
-		ejecutar (inicio);
-	}
+	// Topological Sort
+	// O(V+E)
+	// ordenamiento tal que si V1  es anterior a V2 entonces hay un eje V1->V2
+	// contar caminos distintos para llegar a un vertice en un DAG
 	
-	static void ejecutar (int inicio) {
-		paths = new int[n];
+	static void countPaths (int inicio, int n) {
+		int paths[] = new int[n];
 		visitados = new boolean[n];
+		cola = new ArrayDeque<Integer> ();
+		
 		toposort(inicio);
 		paths[inicio] = 1;
 		for (int i : cola) {
 			for (int v : lisAdy.get(i)) 
 				paths[v] += paths[i];
 		}
-		System.out.println ("inicio: "+inicio);
-		System.out.println (Arrays.toString(paths));
 	}
 
 

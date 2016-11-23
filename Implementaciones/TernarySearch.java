@@ -1,20 +1,15 @@
-
-
-
 public class TernarySearch {
 	static double epsilon = 0.000001d;
 	
-	public static void main (String[] args) {
-		System.out.println ("Min: (x-5)^2");
-		double xx = ts_min(-100000,5);
-		System.out.println ("x = "+xx+"\ty = "+fm(xx));
-	}
+	// Ternary Search
+	// O(log N)
+	// busqueda de max y min en funciones unimodales
 	
-	static double fm (double i) {
+	static double f (double i) {
 		return (i-5)*(i-5);
 	}
 	
-	static double  ts_min (double l, double r) {
+	static double find_min (double l, double r) {
 		double lt, rt, left=l, right=r;
 		
 		while (true) {
@@ -22,7 +17,7 @@ public class TernarySearch {
 				return (left+right)/2;
 			lt = left+(right-left)/3;
 			rt = right-(right-left)/3;
-			if (fm(lt)>fm(rt)) // importante
+			if (f(lt)>f(rt)) // importante para find_max
 				left = lt;
 			else
 				right = rt;

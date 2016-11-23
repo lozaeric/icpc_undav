@@ -5,50 +5,47 @@ import java.util.PriorityQueue;
 
 
 public class Dijkstra {
-	static 	HashMap<Integer, ArrayList<Par>> lisAdy = new HashMap<Integer, ArrayList<Par>> ();
-	static int n;
+	static final int INF = 100000000;
 	
-	public static void main (String[] args) {
-		int inicio = 0;
-		// Grafo Dirigido o No Dirigido
-		// n -> cantidad de vertices
-		// lisAdy -> lista de adyacencia
-		// inicio -> vertice  
-		dijkstra (inicio);
-	}
+	// Single Source Shortest Path
+	// O((V+E) log V)
+	// camino mas corto (peso total y path)
 	
-	static void dijkstra (int inicio) {
+	static void dijkstra (HashMap<Integer, ArrayList<Par>> lisAdy, int inicio, int destino, int n) {
 	      PriorityQueue<Par> pq = new PriorityQueue<Par>();
-	      Par actual;
-	      int distancia[] = new int[n];
+	      int distancia[] = new int[n], parent[] = new int[n];
 	      
-	      Arrays.fill (distancia, 1000000);
+	      Arrays.fill (distancia, INF);
+	      Arrays.fill (parent, -1);
 	      pq.add (new Par(inicio,0));
 	      distancia[inicio] = 0;
 	      while (!pq.isEmpty ()) {
-	      	actual = pq.remove ();
-	      	if (actual.d>distancia[actual.v])
+	      	Par actual = pq.remove ();
+	      	if (actual.w>distancia[actual.v])
 	      		continue;
 	      	for (Par vec : lisAdy.get(actual.v)) {
-      			if (distancia[actual.v]+vec.d<distancia[vec.v]) {
-      				distancia[vec.v] = distancia[actual.v]+vec.d;
+      			if (distancia[actual.v]+vec.w<distancia[vec.v]) {
+      				distancia[vec.v] = distancia[actual.v]+vec.w;
+      				parent[vec.v] = actual.v;
       				pq.add (new Par(vec.v,distancia[vec.v]));
       			}
 	      	}
 	      }
-	      System.out.println (Arrays.toString (distancia));
+	      
+	      for(int i=destino; i!=-1; i=parent[i]) // (reverse) path generator
+				System.out.print (i+" ");
+	      System.out.println ();
 	}
 	
 	static class Par implements Comparable<Par> {
-		public int d, v;
+		public int w, v;
 		
-		public Par (int v, int d) {
-			this.d = d;
-			this.v = v;
+		public Par (int v, int w) {
+			this.v = v; this.w = w;
 		}
 
 		public int compareTo (Par o) {
-	      return d-o.d;
+	      return w-o.w;
       }
 	}
 }

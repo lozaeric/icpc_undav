@@ -1,70 +1,77 @@
 import java.util.ArrayList;
-import java.util.Collections;
 
 
 class Primes {
-	static int sieveSize = 100; // calcula los primos menores o iguales a sieveSize
 	static ArrayList<Integer> primos = new ArrayList<Integer> ();
+	static boolean np[];
 	
-	public static void main (String[] args) {
-		sieve ();
-		System.out.println (primos);
-		System.out.println ("67 es primo?\t"+esPrimo (67));
-		System.out.println ("Factores primos de 128\t"+factoresPrimos (128));
-	}
+	// Calcular primos, obtener cantidad de divisores y coprimos menores a un numero
+	// obtener factores primos de un numero
 	
-	static int gcd(int a, int b) 
-	{ return b == 0 ? a : gcd(b, a % b); }
-	
-	static int eulerPhi(int n) { // cantidad de coprimos de n que son menores
-		int id=0, pf = primos.get (id), ans=n;
-		while(pf*pf<=n) {
-			if(n%pf==0)
-				ans -= ans/pf;
-			while(n%pf==0) 
-				n /= pf;
-			pf = primos.get (++id);
+	static void sieve (int max) { // es prerequisito para todas las demás funciones
+		np = new boolean[max+1];
+		np[0] = np[1] =  true;
+		
+		for (int i=2; i<=max; i++) {
+			if (!np[i]) {
+				primos.add(i);
+				for (int j=i; i*j<=max; j++) 
+					np[i*j] = true;
+			}
 		}
-		if (n != 1)
-			ans -= ans/n;
-		return ans;
 	}
 	
 	static boolean esPrimo(int n) {
-		if (n<=sieveSize)
-			return Collections.binarySearch (primos, n)>=0;
+		if (n<np.length)
+			return !np[n];
 		return factoresPrimos(n).size ()==1;
 	}
 	
-	static void sieve () {
-		boolean np[] = new boolean[sieveSize+1];
-		np[0] = np[1] =  true;
-		long i,j;
-		
-		for (i=2; i*i<np.length; i++) {
-			if (!np[(int) i]) {
-				for (j=i; i*j<np.length; j++) 
-					np[(int) (i*j)] = true;
-			}
-		}
-		for (int t=0; t<np.length; t++) 
-			if (!np[t])
-				primos.add(t);
-	}
-	
-	public static ArrayList<Integer> factoresPrimos(int n){ // TODOS los factores primos
+	static ArrayList<Integer> factoresPrimos (int n) { // TODOS los factores primos, n<=(ultimo primo)^2
 		ArrayList<Integer> factores = new ArrayList<Integer> ();
-		int id=0, pf = primos.get (id);
-		while(pf*pf<=n) {
-			while(n%pf==0) {
-				n /= pf;
+		int id=0, pf = primos.get (id),num=n;
+		
+		while(pf*pf<=num) {
+			while(num%pf==0) {
+				num /= pf;
 				factores.add (pf);
 			}
 			pf = primos.get (++id);
 		}
-		if (n != 1)
-			factores.add (n);
+		if (num != 1)
+			factores.add (num);
 		return factores;
 	}
 	
+	static int cantDivisors(int n) { // cantidad de divisores, n<=(ultimo primo)^2
+		int id=0, pf = primos.get (id), ans=1, num=n;
+		
+		while(pf*pf<=num) {
+			int power = 0;
+			while(num%pf==0) {
+				num /= pf;
+				power++;
+			}
+			ans *= (power+1);
+			pf = primos.get (++id);
+		}
+		if (num != 1)
+			ans *= 2;
+		return ans;
+	}	
+	
+	static int eulerPhi(int n) { // cantidad de coprimos de n que son menores, n<=(ultimo primo)^2
+		int id=0, pf = primos.get (id), ans=n, num=n;
+		
+		while(pf*pf<=num) {
+			if(num%pf==0)
+				ans -= ans/pf;
+			while(num%pf==0) 
+				num /= pf;
+			pf = primos.get (++id);
+		}
+		if (num != 1)
+			ans -= ans/num;
+		return ans;
+	}	
 }

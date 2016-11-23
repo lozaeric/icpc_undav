@@ -1,55 +1,40 @@
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 
 public class Grafo{
-	static HashMap<Integer, ArrayList<Integer>> listaAdy = new HashMap<Integer, ArrayList<Integer>> () ;
-	static int n;
+	// BFS, DFS
+	// O (V+E)
+	// recorrido grafo, camino mas corto en grafos no pesados
 	
-	public static void main (String[] args) {
-		int inicio = 0;
-		// Grafo No Dirigido o Dirigido
-		// n -> cantidad de vertices
-		// lisAdy -> lista de adyacencia
-		// inicio -> vertice
-		dfs(inicio);
-		bfs(inicio);
-	}
-	
-	public static void dfs (int v) {
+	static void dfs (HashMap<Integer, ArrayList<Integer>> listaAdy, int v, int n) {
 		ArrayDeque <Integer> pila = new ArrayDeque <Integer> ();
-		int actual;
 		boolean visitados[] = new boolean[n];
 		
 		pila.add (v);
 		visitados[v] = true;
 		do  {
-			actual = pila.pop ();
-			System.out.println (actual);
+			int actual = pila.pop ();
 			for (int vec : listaAdy.get (actual)) {
 				if (!visitados[vec]) {
 					pila.push (vec);
 					visitados[vec] = true;
 				}
 			}
-			
 		} while (!pila.isEmpty ());
-		
 	}
 	
-	public static void bfs (int v) {
+	static void bfs (HashMap<Integer, ArrayList<Integer>> listaAdy, int v, int n) {
 		ArrayDeque <Integer> cola = new ArrayDeque <Integer> ();
-		int actual, distancias[] = new int [n];
+		int distancias[] = new int [n];
 		boolean visitados[] = new boolean[n];
 		
 		cola.add (v);
 		visitados[v] = true;
 		distancias[v] = 0;
 		do  {
-			actual = cola.remove();
-			System.out.println (actual);
+			int actual = cola.remove();
 			for (int vec : listaAdy.get (actual)) {
 				if (!visitados[vec]) {
 					cola.add (vec);
@@ -59,6 +44,5 @@ public class Grafo{
 			}
 			
 		} while (!cola.isEmpty ());
-		System.out.println (Arrays.toString (distancias));
 	}
 }

@@ -14,12 +14,8 @@ public class SArray {
 	
 	static class SuffixArray{
 		char T[];                        // the input string, up to 100K characters
-		int n;                                             // the length of input string
-		//char P[];     // the pattern string (for string matching)
-		//int m;             // the length of pattern string
-		int[] RA, tempRA;             // rank array and temporary rank array
-		int[] SA, tempSA;         // suffix array and temporary suffix array
-		int[] c;                                         // for counting/radix sort
+		int n;                                           
+		int[] RA, tempRA,  SA, tempSA, c;                                         
 		
 		public SuffixArray  (char T[]) {
 			this.T = T;
