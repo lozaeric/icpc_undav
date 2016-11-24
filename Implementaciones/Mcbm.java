@@ -4,9 +4,9 @@ import java.util.HashMap;
 
 
 public class Mcbm {
-	static HashMap<Integer, ArrayList<Integer>> lisAdy = new HashMap<Integer, ArrayList<Integer>> ();
-	static boolean visitados[];
-	static int match[],n;
+	HashMap<Integer, ArrayList<Integer>> lisAdy = new HashMap<Integer, ArrayList<Integer>> ();
+	boolean visitados[];
+	int match[],n;
 	
 	// Max cardinality bipartite matching
 	// O (V*E)
