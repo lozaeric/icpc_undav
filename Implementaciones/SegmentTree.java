@@ -17,9 +17,10 @@ public class SegmentTree {
 		if (l==r)
 			st[p] = values[l];
 		else {
-			build(left(p), l, getMid(l,r), values);
-			build(right(p), getMid(l,r)+1, r, values);
-			st[p] = Math.max(st[left(p)], st[right(p)]);  // importante
+			int left = p<<1, right = left+1, mid = (l+r)>>1;
+			build(left, l, mid, values);
+			build(right, mid+1, r, values);
+			st[p] = Math.max(st[left], st[right]);  // importante
 		}
 	}
 	
@@ -30,10 +31,10 @@ public class SegmentTree {
 		      st[p] = new_value; 
 		      return;
 		   }
-
-		   update_point(left(p) , L, getMid(L,R), idx, new_value);
-		   update_point(right(p), getMid(L,R) + 1, R , idx, new_value);
-		   st[p] = Math.max(st[left(p)], st[right(p)]);  // importante
+		   int left = p<<1, right = left+1, mid = (L+R)>>1;
+		   update_point(left , L, mid, idx, new_value);
+		   update_point(right, mid+1, R , idx, new_value);
+		   st[p] = Math.max(st[left], st[right]);  // importante
 	}
 	  
 	void update_point(int idx, int new_value) {
@@ -49,17 +50,7 @@ public class SegmentTree {
 			return -1;    // importante
 		if (l>=i && r<=j)
 			return st[p];
-		return Math.max(rmq(left(p),l,getMid(l,r), i, j), rmq(right(p), getMid(l,r)+1, r, i, j));  // importante
-	}
-	
-	static int left (int p) {
-		return p<<1;
-	}
-	static int right  (int p) {
-		return (p<<1)+1;
-	}
-	
-	static int getMid (int a, int b) {
-		return (a+b)>>1;
+		int left = p<<1, right = left+1, mid = (l+r)>>1;
+		return Math.max(rmq(left,l,mid, i, j), rmq(right, mid+1, r, i, j));  // importante
 	}
 }

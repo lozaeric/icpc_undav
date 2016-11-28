@@ -16,18 +16,20 @@ public class StLazy {
 		if (l==r)
 			st[p] = values[l];
 		else {
-			build(left(p), l, getMid(l,r), values);
-			build(right(p), getMid(l,r)+1, r, values);
-			st[p] = Math.max(st[left(p)], st[right(p)]); // importante
+			int left = p<<1, right = left+1, mid = (l+r)>>1;
+			build(left, l, mid, values);
+			build(right, mid+1, r, values);
+			st[p] = Math.max(st[left], st[right]); // importante
 		}
 	}
 	
 	private void updateRange (int p,int l, int r, int i, int j, int diff) {
+		int left = p<<1, right = left+1, mid = (l+r)>>1;
 		if (lazy[p]!=0) {
 			st[p] += lazy[p];
 			if (l!=r) {
-				lazy[right(p)] += lazy[p];
-				lazy[left(p)] += lazy[p];
+				lazy[right] += lazy[p];
+				lazy[left] += lazy[p];
 			}
 			lazy[p] = 0;
 		}
@@ -37,14 +39,14 @@ public class StLazy {
 		if (i<=l && r<=j) {
 			st[p] += diff; // importante
 			if (l!=r) {
-				lazy[right(p)] += diff;
-				lazy[left(p)] += diff;
+				lazy[right] += diff;
+				lazy[left] += diff;
 			}
 			return;
 		}
-		updateRange (left(p), l, getMid(l,r), i, j, diff);
-		updateRange (right(p), getMid(l,r)+1, r, i, j, diff);
-		st[p] = Math.max(st[left(p)], st[right(p)]); // importante
+		updateRange (left, l, mid, i, j, diff);
+		updateRange (right, mid+1, r, i, j, diff);
+		st[p] = Math.max(st[left], st[right]); // importante
 	}
 	
 	void updateRange (int i, int j, int diff) {
@@ -58,26 +60,17 @@ public class StLazy {
 	private int rmq(int p, int l, int r, int i, int j) {
 		if (i > r || j < l) 
 			return -1;   // importante
+		int left = p<<1, right = left+1, mid = (l+r)>>1;
 		if (lazy[p]!=0) {
 			st[p] += lazy[p];
 			if (l!=r) {
-				lazy[right(p)] += lazy[p];
-				lazy[left(p)] += lazy[p];
+				lazy[right] += lazy[p];
+				lazy[left] += lazy[p];
 			}
 			lazy[p] = 0;
 		}
 		if (l>=i && r<=j)
 			return st[p];
-		return Math.max(rmq(left(p),l,getMid(l,r), i, j), rmq(right(p), getMid(l,r)+1, r, i, j));  // importante
-	}
-	
-	static int left (int p) {
-		return p<<1;
-	}
-	static int right  (int p) {
-		return (p<<1)+1;
-	}
-	static int getMid (int a, int b) {
-		return (a+b)>>1;
+		return Math.max(rmq(left,l,mid, i, j), rmq(right, mid+1, r, i, j));  // importante
 	}
 }
