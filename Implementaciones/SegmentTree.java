@@ -49,10 +49,7 @@ public class SegmentTree {
 			return -1;    // importante
 		if (l>=i && r<=j)
 			return st[p];
-		
-		int p1 = rmq(left(p),l,getMid(l,r), i, j),
-		    p2 = rmq(right(p), getMid(l,r)+ 1, r, i, j);
-		return Math.max(p1, p2);  // importante
+		return Math.max(rmq(left(p),l,getMid(l,r), i, j), rmq(right(p), getMid(l,r)+1, r, i, j));  // importante
 	}
 	
 	static int left (int p) {
