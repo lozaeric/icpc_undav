@@ -8,15 +8,15 @@ class Primes {
 	// Calcular primos, obtener cantidad de divisores y coprimos menores a un numero
 	// obtener factores primos de un numero
 	
-	static void sieve (int max) { // es prerequisito para todas las demás funciones
+	static void sieve (int max) {  // es prerequisito para todas las demás funciones
 		np = new boolean[max+1];
 		np[0] = np[1] =  true;
-		
+
 		for (int i=2; i<=max; i++) {
 			if (!np[i]) {
 				primos.add(i);
-				for (int j=i; i*j<=max; j++) 
-					np[i*j] = true;
+				for (long j=i; i*j<=max; j++) 
+					np[(int) (i*j)] = true;
 			}
 		}
 	}
