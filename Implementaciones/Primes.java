@@ -29,14 +29,13 @@ class Primes {
 	
 	static ArrayList<Integer> factoresPrimos (int n) { // TODOS los factores primos, n<=(ultimo primo)^2
 		ArrayList<Integer> factores = new ArrayList<Integer> ();
-		int id=0, pf = primos.get (id),num=n;
+		int id=0,num=n;
 		
-		while(pf*pf<=num) {
+		for (long pf = primos.get (id); pf*pf<=num; pf = primos.get (++id)) {
 			while(num%pf==0) {
 				num /= pf;
-				factores.add (pf);
+				factores.add ((int) pf);
 			}
-			pf = primos.get (++id);
 		}
 		if (num != 1)
 			factores.add (num);
@@ -44,34 +43,28 @@ class Primes {
 	}
 	
 	static int cantDivisors(int n) { // cantidad de divisores, n<=(ultimo primo)^2
-		int id=0, pf = primos.get (id), ans=1, num=n;
+		int id=0, ans=1, num=n;
 		
-		while(pf*pf<=num) {
+		for (long pf = primos.get (id); pf*pf<=num; pf = primos.get (++id)) {
 			int power = 0;
 			while(num%pf==0) {
 				num /= pf;
 				power++;
 			}
 			ans *= (power+1);
-			pf = primos.get (++id);
 		}
-		if (num != 1)
-			ans *= 2;
-		return ans;
+		return num!=1? 2*ans:ans;
 	}	
 	
 	static int eulerPhi(int n) { // cantidad de coprimos de n que son menores, n<=(ultimo primo)^2
-		int id=0, pf = primos.get (id), ans=n, num=n;
+		int id=0, ans=n, num=n;
 		
-		while(pf*pf<=num) {
+		for (long pf = primos.get (id); pf*pf<=num; pf = primos.get (++id)) {
 			if(num%pf==0)
 				ans -= ans/pf;
 			while(num%pf==0) 
 				num /= pf;
-			pf = primos.get (++id);
 		}
-		if (num != 1)
-			ans -= ans/num;
-		return ans;
+		return num!=1? ans-ans/num:ans;
 	}	
 }
