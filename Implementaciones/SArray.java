@@ -28,7 +28,7 @@ public class SArray {
 			constructSA();
 		}
 		
-		private void constructSA() {              // this version can go up to 100000 characters
+		void constructSA() {              // this version can go up to 100000 characters
 		    int i, k, r;
 		    for (i = 0; i < n; i++) 
 		    	RA[i] = T[i];                      // initial rankings
@@ -46,7 +46,7 @@ public class SArray {
 		    } 
 		}
 		
-		private void countingSort(int k) {
+		void countingSort(int k) {
 		    int i, sum, maxi = Math.max(300, n);   // up to 255 ASCII chars or length of n
 		    for (i = 0; i < c.length; i++) c[i] = 0;                // clear frequency table
 		    for (i = 0; i < n; i++)                    // count the frequency of each rank
@@ -61,10 +61,10 @@ public class SArray {
 		}
 		
 
-		private int strncmp(char[] a, int i, char[] b, int j, int n){
-		    for (int k=0; i+k < a.length && j+k < b.length; k++){
-		      if (a[i+k] != b[j+k]) return a[i+k] - b[j+k];
-		    }
+		int strncmp(char[] a, int i, char[] b, int j, int n){
+		    for (int k=0; i+k < a.length && j+k < b.length; k++)
+		      if (a[i+k] != b[j+k]) 
+		    	  return a[i+k] - b[j+k];
 		    return 0;
 		}
 

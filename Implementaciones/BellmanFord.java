@@ -15,8 +15,8 @@ public class BellmanFord {
 		
 		Arrays.fill (distancias, INF);
 		distancias[inicio] = 0;
-	   for (int i = 0; i<n-1; i++)  
-	   	for (int u = 0; u<n; u++)  
+		for (int i = 0; i<n-1; i++)  
+			for (int u = 0; u<n; u++)  
 			   for (Par vec : lisAdy.get (u)) 
 			   	distancias[vec.v] = Math.min (distancias[u]+vec.w, distancias[vec.v]);
 	}
@@ -30,7 +30,7 @@ public class BellmanFord {
 	}
 	
 	static class Par {
-		public int v,w;
+		int v,w;
 		
 		public Par (int v, int w) {
 			this.v = v; this.w = w;

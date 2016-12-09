@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 
 public class Mcbm {
-	HashMap<Integer, ArrayList<Integer>> lisAdy = new HashMap<Integer, ArrayList<Integer>> ();
+	HashMap<Integer, ArrayList<Integer>> lisAdy = new HashMap<> ();
 	boolean visitados[];
 	int match[],n;
 	
@@ -35,7 +35,7 @@ public class Mcbm {
 		return cont;
 	}
 	
-	private int aug (int i) {
+	int aug (int i) {
 		if (visitados[i])
 			return 0;
 		visitados[i] = true;

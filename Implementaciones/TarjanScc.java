@@ -13,7 +13,7 @@ public class TarjanScc {
 		dfs_low = new int [n];
 		dfs_num = new int [n];
 		visitados = new boolean[n];
-		pila = new ArrayDeque<Integer>();
+		pila = new ArrayDeque<>();
 		
 		for (int i=0; i<n; i++) {
 			if (dfs_num[i]==0)

@@ -8,7 +8,7 @@ import java.util.HashMap;
 class MaxFlow {
 	static final int  INF = 1000000;
 	int f,s,p[],res[][],t;
-	HashMap<Integer, ArrayList<Integer>> lisAdy = new HashMap<Integer, ArrayList<Integer>> ();
+	HashMap<Integer, ArrayList<Integer>> lisAdy = new HashMap<> ();
 	
 	// Edmond Karps
 	// O (V*E^2)
@@ -30,7 +30,7 @@ class MaxFlow {
 	}
 	
 	int maxFlow () {
-		ArrayDeque<Integer> q  = new ArrayDeque<Integer> ();
+		ArrayDeque<Integer> q  = new ArrayDeque<> ();
 		boolean visitados[];
 		int u, mf = 0;
 		

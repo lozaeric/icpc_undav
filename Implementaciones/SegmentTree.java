@@ -24,7 +24,7 @@ public class SegmentTree {
 		}
 	}
 	
-	private void update_point(int p, int L, int R, int idx, int new_value) {
+	void update_point(int p, int L, int R, int idx, int new_value) {
 		   if (idx > R || idx < L)
 		      return;
 		   if (L == idx && R == idx) {
@@ -45,7 +45,7 @@ public class SegmentTree {
 		return rmq(1,0,n-1,i,j);
 	}
 	
-	private int rmq(int p, int l, int r, int i, int j) {
+	int rmq(int p, int l, int r, int i, int j) {
 		if (i > r || j < l) 
 			return -1;    // importante
 		if (l>=i && r<=j)

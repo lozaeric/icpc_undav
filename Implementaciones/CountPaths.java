@@ -16,7 +16,7 @@ public class CountPaths {
 	static void countPaths (int inicio, int n) {
 		int paths[] = new int[n];
 		visitados = new boolean[n];
-		cola = new ArrayDeque<Integer> ();
+		cola = new ArrayDeque<> ();
 		
 		toposort(inicio);
 		paths[inicio] = 1;

@@ -23,7 +23,7 @@ public class StLazy {
 		}
 	}
 	
-	private void updateRange (int p,int l, int r, int i, int j, int diff) {
+	void updateRange (int p,int l, int r, int i, int j, int diff) {
 		int left = p<<1, right = left+1, mid = (l+r)>>1;
 		if (lazy[p]!=0) {
 			st[p] += lazy[p];
@@ -57,7 +57,7 @@ public class StLazy {
 		return rmq(1,0,n-1,i,j);
 	}
 	
-	private int rmq(int p, int l, int r, int i, int j) {
+	int rmq(int p, int l, int r, int i, int j) {
 		if (i > r || j < l) 
 			return -1;   // importante
 		int left = p<<1, right = left+1, mid = (l+r)>>1;

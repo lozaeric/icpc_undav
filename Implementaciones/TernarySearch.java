@@ -1,5 +1,5 @@
 public class TernarySearch {
-	static double epsilon = 0.000001d;
+	static final double epsilon = 0.000001d;
 	
 	// Ternary Search
 	// O(log N)

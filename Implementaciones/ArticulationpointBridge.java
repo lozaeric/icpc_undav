@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ArticulationpointBridge {
-	static HashMap<Integer, ArrayList<Integer>> lisAdy = new HashMap<Integer, ArrayList<Integer>> () ;
+	static HashMap<Integer, ArrayList<Integer>> lisAdy = new HashMap<> () ;
 	static int dfsRoot, bridges, dfsCount, rootChildren;
 	static int dfs_low[], dfs_num[], dfs_parent[];
 	static boolean isArticulation[];

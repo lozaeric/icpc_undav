@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 
 class Primes {
-	static ArrayList<Integer> primos = new ArrayList<Integer> ();
+	static ArrayList<Integer> primos = new ArrayList<> ();
 	static boolean np[];
 	
 	// Calcular primos, obtener cantidad de divisores y coprimos menores a un numero
@@ -28,7 +28,7 @@ class Primes {
 	}
 	
 	static ArrayList<Integer> factoresPrimos (int n) { // TODOS los factores primos, n<=(ultimo primo)^2
-		ArrayList<Integer> factores = new ArrayList<Integer> ();
+		ArrayList<Integer> factores = new ArrayList<> ();
 		int num=n;
 		
 		for (long pf : primos) {

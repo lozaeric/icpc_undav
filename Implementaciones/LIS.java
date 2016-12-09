@@ -8,7 +8,7 @@ public class LIS {
 	// O (n log n)
 	
 	static void lis (int array[]) { 
-		ArrayList<Integer> l = new ArrayList<Integer> ();
+		ArrayList<Integer> l = new ArrayList<> ();
 		int[] L_id = new int[array.length], P = new int[array.length];
 		int lis=0, lis_end=0;
 		
@@ -28,7 +28,7 @@ public class LIS {
 	      }
 		}
 		//rebuild lis
-		ArrayDeque<Integer> s = new ArrayDeque<Integer>();
+		ArrayDeque<Integer> s = new ArrayDeque<>();
 		for (int x = lis_end; x >= 0; x = P[x]) 
 			s.push(array[x]);
 		System.out.println (s.size ()+"\n"+s);

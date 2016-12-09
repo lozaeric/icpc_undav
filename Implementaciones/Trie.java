@@ -3,7 +3,7 @@ import java.util.HashMap;
 
 
 public class Trie {
-	HashMap<Integer, int[]>  hijos = new HashMap<Integer, int[]> ();
+	HashMap<Integer, int[]>  hijos = new HashMap<> ();
 	ArrayList<Boolean> terminables;
 	int size = 0; //incluye nodo vacio inicial
 	
@@ -12,7 +12,7 @@ public class Trie {
 	// genera un diccionario y busca eficientemente si existe una palabra o si es prefijo
 	
 	public Trie (String palabras[]) {
-		terminables = new ArrayList<Boolean> ();
+		terminables = new ArrayList<> ();
 		crearNodo ();
 		for (String s : palabras) 
 			add (s.toCharArray ());

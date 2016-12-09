@@ -9,7 +9,7 @@ public class Grafo{
 	// recorrido grafo, camino mas corto en grafos no pesados
 	
 	static void dfs (HashMap<Integer, ArrayList<Integer>> listaAdy, int v, int n) {
-		ArrayDeque <Integer> pila = new ArrayDeque <Integer> ();
+		ArrayDeque <Integer> pila = new ArrayDeque <> ();
 		boolean visitados[] = new boolean[n];
 		
 		pila.add (v);
@@ -26,7 +26,7 @@ public class Grafo{
 	}
 	
 	static void bfs (HashMap<Integer, ArrayList<Integer>> listaAdy, int v, int n) {
-		ArrayDeque <Integer> cola = new ArrayDeque <Integer> ();
+		ArrayDeque <Integer> cola = new ArrayDeque <> ();
 		int distancias[] = new int [n];
 		boolean visitados[] = new boolean[n];
 		

@@ -12,7 +12,7 @@ public class Dijkstra {
 	// camino mas corto (peso total y path)
 	
 	static void dijkstra (HashMap<Integer, ArrayList<Par>> lisAdy, int inicio, int destino, int n) {
-	      PriorityQueue<Par> pq = new PriorityQueue<Par>();
+	      PriorityQueue<Par> pq = new PriorityQueue<>();
 	      int distancia[] = new int[n], parent[] = new int[n];
 	      
 	      Arrays.fill (distancia, INF);
@@ -38,7 +38,7 @@ public class Dijkstra {
 	}
 	
 	static class Par implements Comparable<Par> {
-		public int w, v;
+		int w, v;
 		
 		public Par (int v, int w) {
 			this.v = v; this.w = w;

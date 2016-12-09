@@ -8,7 +8,7 @@ public class CheckBipartite {
 	// verificar que los vertices puedan pintarse de dos colores sin que haya un eje entre dos colores iguales
 	
 	static boolean esBipartito (HashMap<Integer, ArrayList<Integer>> lisAdy, int n) {
-		ArrayDeque <Integer> cola = new ArrayDeque <Integer> ();
+		ArrayDeque <Integer> cola = new ArrayDeque <> ();
 		int colores[] = new int[n];
 		
 		cola.add (0);

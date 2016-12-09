@@ -47,7 +47,7 @@ public class MinSpanningTree {
 	static class Edge implements Comparable<Edge> {
 		int i,j,w;
 
-		Edge (int i, int j, int w) {
+		public Edge (int i, int j, int w) {
 			this.i = i; this.w = w; this.j = j;
 		}
 		public int compareTo (Edge o) {
