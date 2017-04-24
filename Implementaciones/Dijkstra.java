@@ -13,10 +13,11 @@ public class Dijkstra {
 	
 	static void dijkstra (HashMap<Integer, ArrayList<Par>> lisAdy, int inicio, int destino, int n) {
 	      PriorityQueue<Par> pq = new PriorityQueue<>();
-	      int distancia[] = new int[n], parent[] = new int[n];
+	      int distancia[] = new int[n]; 
+	     // int parent[] = new int[n];
 	      
 	      Arrays.fill (distancia, INF);
-	      Arrays.fill (parent, -1);
+	      //Arrays.fill (parent, -1);
 	      pq.add (new Par(inicio,0));
 	      distancia[inicio] = 0;
 	      while (!pq.isEmpty ()) {
@@ -26,15 +27,15 @@ public class Dijkstra {
 	      	for (Par vec : lisAdy.get(actual.v)) {
       			if (distancia[actual.v]+vec.w<distancia[vec.v]) {
       				distancia[vec.v] = distancia[actual.v]+vec.w;
-      				parent[vec.v] = actual.v;
+      			//	parent[vec.v] = actual.v;
       				pq.add (new Par(vec.v,distancia[vec.v]));
       			}
 	      	}
 	      }
-	      
-	      for(int i=destino; i!=-1; i=parent[i]) // (reverse) path generator
-				System.out.print (i+" ");
-	      System.out.println ();
+	      return distancia[destino];
+	      // (reverse) path generator
+	      // for(int i=destino; i!=-1; i=parent[i]) 
+	      // 		System.out.print (i+" ");
 	}
 	
 	static class Par implements Comparable<Par> {
@@ -45,7 +46,7 @@ public class Dijkstra {
 		}
 
 		public int compareTo (Par o) {
-	      return w-o.w;
-      }
+	      		return w-o.w;
+      		}
 	}
 }
