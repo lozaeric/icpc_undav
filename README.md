@@ -7,9 +7,10 @@
    * Torneo Regional 2017: https://icpc.baylor.edu/regionals/finder/southamerica-south-2017
  * Problemas y jueces online:
    * https://icpcarchive.ecs.baylor.edu
-   * http://www.spoj.com/
+   * http://www.spoj.com
    * http://coj.uci.cu/index.xhtml
-   * https://uva.onlinejudge.org/
+   * https://uva.onlinejudge.org
+   * https://codefights.com
  * Estructuras y Algoritmos:
    * http://cpbook.net/#downloads
    * https://sites.google.com/site/trainingcampargentina2016/home/clases-teoricas
