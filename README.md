@@ -1,6 +1,6 @@
-## BlackRock
+## BlackRock - Universidad Nacional de Avellaneda
 ### Coach: Manuel Dubinsky, Competidores: Eric Loza, Gabriel Torrandella y Patricio Manka
-### Repositorio del primer equipo de la Universidad Nacional de Avellaneda que participó de los torneos del ICPC organizados por la ACM.
+### Repositorio del primer equipo de la UNDAV que participó de los torneos ACM-ICPC.
 
  * Página oficial del ICPC: https://icpc.baylor.edu
    * Torneo Argentino de Programación 2017: https://icpc.baylor.edu/regionals/finder/tap-2017
