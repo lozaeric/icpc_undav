@@ -1,7 +1,6 @@
 import sys
 
 def solve (p, q, validas):
-	validas.sort()
 	correctas = []
 	for i in validas:
 		pila = []
@@ -18,6 +17,7 @@ def solve (p, q, validas):
 	return correctas
 	
 validas = ['iiiioooo','iiioiooo','iioiiooo','ioiiiooo','iiiooioo','iioioioo','ioiioioo','iiooiioo','ioioiioo','iiioooio','iioiooio','ioiiooio','iiooioio','ioioioio']
+validas.sort()
 n = int(input())
 for i in range(n):
 	p = input()
