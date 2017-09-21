@@ -1,5 +1,3 @@
-import sys
-
 def solve (p, q, validas):
 	correctas = []
 	for i in validas:
