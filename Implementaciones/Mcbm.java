@@ -1,9 +1,4 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-
-
-public class Mcbm {
+class Mcbm {
 	HashMap<Integer, ArrayList<Integer>> lisAdy = new HashMap<> ();
 	boolean visitados[];
 	int match[],n;

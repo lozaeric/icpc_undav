@@ -1,9 +1,11 @@
-public class FloydWarshall {
+class FloydWarshall {
+	int matAdy[][];
+	
 	// All Source Shortest Path
 	// O(V^3)
 	// todos los caminos mas cortos, minimax, maximin
 	
-	static void fw (int matAdy[][]) {
+	void fw () {
 		for (int k = 0; k < matAdy.length; k++)
 			for (int i = 0; i < matAdy.length; i++)
 				for (int j = 0; j < matAdy.length; j++)

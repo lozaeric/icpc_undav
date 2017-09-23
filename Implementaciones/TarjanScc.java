@@ -1,14 +1,15 @@
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.HashMap;
-
-public class TarjanScc {
-	static int dfsCount,scc,dfs_low[],dfs_num[];
-	static boolean visitados[];
-	static ArrayDeque<Integer> pila;
-	static HashMap<Integer, ArrayList<Integer>> lisAdy;
+class TarjanScc {
+	int dfsCount,scc,dfs_low[],dfs_num[];
+	boolean visitados[];
+	ArrayDeque<Integer> pila;
+	HashMap<Integer, ArrayList<Integer>> lisAdy;
 	
-	static void tarjan (int n) {
+	// Tarjan 
+	// O(V+E)
+	// encontrar strongly connected components en grafo
+	
+	void tarjan () {
+		int n = lisAdy.keySet().size();
 		scc = dfsCount = 0;
 		dfs_low = new int [n];
 		dfs_num = new int [n];
@@ -21,7 +22,7 @@ public class TarjanScc {
 		}
 	}
 	
-	static void tarjanSCC (int u) {
+	void tarjanSCC (int u) {
 		dfs_low[u] = dfs_num[u] = ++dfsCount;
 		
 		pila.add(u);

@@ -1,16 +1,13 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-
-
-public class BellmanFord {
-	static final int INF = 100000000;
+class BellmanFord {
+	HashMap<Integer, ArrayList<Par>> lisAdy;
+	int INF = 100000000;
 	
 	// Single Source Shortest Path
 	// O (V E)
 	// camino mas corto, detectar ciclos negativos
 	
-	static void bellman_ford (HashMap<Integer, ArrayList<Par>> lisAdy, int inicio, int n) {
+	int[] bellman_ford (int inicio) {
+		int n = lisAdy.keySet().size();
 		int distancias[] = new int[n];
 		
 		Arrays.fill (distancias, INF);
@@ -19,21 +16,24 @@ public class BellmanFord {
 			for (int u = 0; u<n; u++)  
 			   for (Par vec : lisAdy.get (u)) 
 			   	distancias[vec.v] = Math.min (distancias[u]+vec.w, distancias[vec.v]);
+		return distancias;
 	}
 	
-	static boolean hasNegCycle (HashMap<Integer, ArrayList<Par>> lisAdy, int distancias[], int n) {  // posterior a bellman_ford
-	   for (int u = 0; u<n; u++)  
+	boolean hasNegCycle (int distancias[]) {  // posterior a bellman_ford
+		int n = lisAdy.keySet().size();
+		for (int u = 0; u<n; u++)  
 		   for (Par vec : lisAdy.get (u)) 
 		   	if (distancias[vec.v]>distancias[u]+vec.w)
 		   		return true;
 	   return false;
 	}
 	
-	static class Par {
+	class Par {
 		int v,w;
 		
 		public Par (int v, int w) {
-			this.v = v; this.w = w;
+			this.v = v; 
+			this.w = w;
 		}
 	}
 }

@@ -1,4 +1,4 @@
-public class FenwickTree {
+class FenwickTree {
 	int ft[];
 	
 	// O (log n) para suma en un rango y modificacion de un elemento

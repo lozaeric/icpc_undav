@@ -1,12 +1,5 @@
-
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-
-
 class MaxFlow {
-	static final int  INF = 1000000;
+	int  INF = 1000000;
 	int f,s,p[],res[][],t;
 	HashMap<Integer, ArrayList<Integer>> lisAdy = new HashMap<> ();
 	

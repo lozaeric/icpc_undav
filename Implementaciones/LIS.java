@@ -1,13 +1,8 @@
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Collections;
-
-
-public class LIS {
+class LIS {
 	// longest increasing (o decreasing) subsequence
 	// O (n log n)
 	
-	static void lis (int array[]) { 
+	void lis (int array[]) { 
 		ArrayList<Integer> l = new ArrayList<> ();
 		int[] L_id = new int[array.length], P = new int[array.length];
 		int lis=0, lis_end=0;

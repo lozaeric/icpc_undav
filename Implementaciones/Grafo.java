@@ -1,14 +1,13 @@
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.HashMap;
-
-
-public class Grafo{
+class Grafo{
+	HashMap<Integer, ArrayList<Integer>> lisAdy;
+	
 	// BFS, DFS
 	// O (V+E)
 	// recorrido grafo, camino mas corto en grafos no pesados
+	// verificar que los vertices puedan pintarse de dos colores sin que haya un eje entre dos colores iguales
 	
-	static void dfs (HashMap<Integer, ArrayList<Integer>> listaAdy, int v, int n) {
+	void dfs (int v) {
+		int n = lisAdy.keySet().size();
 		ArrayDeque <Integer> pila = new ArrayDeque <> ();
 		boolean visitados[] = new boolean[n];
 		
@@ -25,7 +24,8 @@ public class Grafo{
 		} while (!pila.isEmpty ());
 	}
 	
-	static void bfs (HashMap<Integer, ArrayList<Integer>> listaAdy, int v, int n) {
+	void bfs (int v) {
+		int n = lisAdy.keySet().size();
 		ArrayDeque <Integer> cola = new ArrayDeque <> ();
 		int distancias[] = new int [n];
 		boolean visitados[] = new boolean[n];
@@ -44,5 +44,26 @@ public class Grafo{
 			}
 			
 		} while (!cola.isEmpty ());
+	}
+	
+	boolean esBipartito () {
+		int n = lisAdy.keySet().size();
+		ArrayDeque <Integer> cola = new ArrayDeque <> ();
+		int colores[] = new int[n];
+		
+		cola.add (0);
+		colores[0] = 1;
+		do  {
+			int actual = cola.remove ();
+			for (int vec : lisAdy.get (actual)) {
+				if (colores[vec]==0) {
+					cola.add (vec);
+					colores[vec] = colores[actual]==1? 2:1;
+				}
+				else if (colores[vec]==colores[actual]) 
+					return false;
+			}
+		} while (!cola.isEmpty ());
+		return true;
 	}
 }

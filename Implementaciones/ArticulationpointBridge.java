@@ -1,16 +1,15 @@
-import java.util.ArrayList;
-import java.util.HashMap;
+class ArticulationpointBridge {
+	HashMap<Integer, ArrayList<Integer>> lisAdy;
+	int dfsRoot, bridges, dfsCount, rootChildren;
+	int dfs_low[], dfs_num[], dfs_parent[];
+	boolean isArticulation[];
 
-public class ArticulationpointBridge {
-	static HashMap<Integer, ArrayList<Integer>> lisAdy = new HashMap<> () ;
-	static int dfsRoot, bridges, dfsCount, rootChildren;
-	static int dfs_low[], dfs_num[], dfs_parent[];
-	static boolean isArticulation[];
-	
 	// Encontrar ejes que sean puentes y vertices que sean puntos de articulacion 
+	// si los quito, el grafo ya no es un solo componente conexo
 	// O (V+E)
 	
-	static void searchAPyB (int n) {
+	void searchAPyB () {
+		int n = lisAdy.keySet().size();
 		dfs_low = new int[n];
 		dfs_num = new int[n];
 		dfs_parent = new int[n];
@@ -26,7 +25,7 @@ public class ArticulationpointBridge {
 		}
 	}
 	
-	static void dfs (int u) {
+	void dfs (int u) {
 		dfs_low[u] = dfs_num[u] = ++dfsCount;
 		for (int vec : lisAdy.get(u)) {
 			if (dfs_num[vec]==0) {

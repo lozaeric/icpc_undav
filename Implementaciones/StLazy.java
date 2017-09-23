@@ -1,4 +1,4 @@
-public class StLazy {
+class StLazy {
 	int st[], lazy[], n;
 	
 	// Segment Tree

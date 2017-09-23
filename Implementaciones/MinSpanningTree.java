@@ -1,11 +1,9 @@
-import java.util.Arrays;
-
-public class MinSpanningTree {	
+class MinSpanningTree {	
 	// Minimum (o Maximum) Spanning Tree 
 	// O(E Log V)
 	// costo total, maximin, minimax, spanning forest
 	
-	static long costoMST (Edge ejes[], int n) { 
+	long costoMST (Edge ejes[], int n) { 
 		long costo = 0;
 		UnionFind uf = new UnionFind (n);
 		
@@ -21,7 +19,7 @@ public class MinSpanningTree {
 		return costo;
 	}
 	
-	static class UnionFind {
+	class UnionFind {
 	    int parent[],count;
 	    
 	    UnionFind (int n) {
@@ -44,11 +42,12 @@ public class MinSpanningTree {
 	    }
 	}
 	
-	static class Edge implements Comparable<Edge> {
+	class Edge implements Comparable<Edge> {
 		int i,j,w;
 
 		public Edge (int i, int j, int w) {
-			this.i = i; this.w = w; this.j = j;
+			this.i = i; this.w = w; 
+			this.j = j;
 		}
 		public int compareTo (Edge o) {
 	     return w-o.w;

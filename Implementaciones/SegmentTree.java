@@ -1,6 +1,4 @@
-
-
-public class SegmentTree {
+class SegmentTree {
 	int st[], n;
 	
 	// Segment Tree

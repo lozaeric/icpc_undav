@@ -1,14 +1,11 @@
-import java.util.ArrayList;
-
-
 class Primes {
-	static ArrayList<Integer> primos = new ArrayList<> ();
-	static boolean np[];
+	ArrayList<Integer> primos = new ArrayList<> ();
+	boolean np[];
 	
 	// Calcular primos, obtener cantidad de divisores y coprimos menores a un numero
 	// obtener factores primos de un numero
 	
-	static void sieve (int max) {  // es prerequisito para todas las demás funciones
+	void sieve (int max) {  // es prerequisito para todas las demás funciones
 		np = new boolean[max+1];
 		np[0] = np[1] =  true;
 
@@ -21,13 +18,13 @@ class Primes {
 		}
 	}
 	
-	static boolean esPrimo(int n) {
+	boolean esPrimo(int n) {
 		if (n<np.length)
 			return !np[n];
 		return factoresPrimos(n).size ()==1;
 	}
 	
-	static ArrayList<Integer> factoresPrimos (int n) { // TODOS los factores primos, n<=(ultimo primo)^2
+	ArrayList<Integer> factoresPrimos (int n) { // TODOS los factores primos, n<=(ultimo primo)^2
 		ArrayList<Integer> factores = new ArrayList<> ();
 		int num=n;
 		
@@ -44,7 +41,7 @@ class Primes {
 		return factores;
 	}
 	
-	static int cantDivisors(int n) { // cantidad de divisores, n<=(ultimo primo)^2
+	int cantDivisors(int n) { // cantidad de divisores, n<=(ultimo primo)^2
 		int ans=1, num=n;
 		
 		for (long pf : primos) {
@@ -60,7 +57,7 @@ class Primes {
 		return num!=1? 2*ans:ans;
 	}	
 	
-	static int eulerPhi(int n) { // cantidad de coprimos de n que son menores, n<=(ultimo primo)^2
+	int eulerPhi(int n) { // cantidad de coprimos de n que son menores, n<=(ultimo primo)^2
 		int ans=n, num=n;
 		
 		for (long pf : primos) {

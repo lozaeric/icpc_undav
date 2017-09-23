@@ -1,12 +1,12 @@
-public class Kmp {
-	static int back[];
-	static char s[],p[];
+class Kmp {
+	int back[];
+	char s[],p[];
 	
-	// Ocurrencias de un string P en un string S
+	// Ocurrencias de un string P en otro string S
 	// O (n+m)
 	// cuantas ocurrencias y en que indices
 	
-	static void preKmp () {
+	void preKmp () {
 		int i=0, j=-1;
 		back = new int[s.length+p.length];
 		back[0] = -1;
@@ -18,7 +18,7 @@ public class Kmp {
 		}
 	}
 	
-	static void kmp () {
+	void kmp () {
 		int i=0, j=0;
 		while  (i<s.length) {
 			while (j>=0 && s[i]!=p[j])

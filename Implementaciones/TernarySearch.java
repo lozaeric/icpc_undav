@@ -1,15 +1,15 @@
-public class TernarySearch {
-	static final double epsilon = 0.000001d;
+class TernarySearch {
+	double epsilon = 0.000001d;
 	
 	// Ternary Search
 	// O(log N)
 	// busqueda de max y min en funciones unimodales
 	
-	static double f (double i) {
+	double f (double i) { //funcion de valor
 		return (i-5)*(i-5);
 	}
 	
-	static double find_min (double l, double r) {
+	double find_min (double l, double r) {
 		double lt, rt, left=l, right=r;
 		
 		while (true) {

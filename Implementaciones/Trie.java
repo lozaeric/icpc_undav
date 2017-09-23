@@ -1,8 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-
-
-public class Trie {
+class Trie {
 	HashMap<Integer, int[]>  hijos = new HashMap<> ();
 	ArrayList<Boolean> terminables;
 	int size = 0; //incluye nodo vacio inicial
