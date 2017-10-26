@@ -45,10 +45,6 @@ public class F {
 	static class SegmentTree {
 		int st[],n;
 		
-		// Segment Tree
-		// max,min o suma en un rango en O(log n)
-		// modificacion de un elemento en O(log n)
-		
 		public SegmentTree (int values[]) {
 			n = values.length;
 			st = new int[4*n];
@@ -64,7 +60,7 @@ public class F {
 			   int left = p<<1, right = left+1, mid = (L+R)>>1;
 			   update_point(left , L, mid, idx, new_value);
 			   update_point(right, mid+1, R , idx, new_value);
-			   st[p] = st[left]+st[right];  // importante
+			   st[p] = st[left]+st[right];  
 		}
 		  
 		void update_point(int idx, int new_value) {
@@ -77,11 +73,11 @@ public class F {
 		
 		int rmq(int p, int l, int r, int i, int j) {
 			if (i > r || j < l) 
-				return 0;    // importante
+				return 0;    
 			if (l>=i && r<=j)
 				return st[p];
 			int left = p<<1, right = left+1, mid = (l+r)>>1;
-			return rmq(left,l,mid, i, j)+rmq(right, mid+1, r, i, j);  // importante
+			return rmq(left,l,mid, i, j)+rmq(right, mid+1, r, i, j);  
 		}
 	}
 }
