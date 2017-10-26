@@ -1,16 +1,10 @@
 n,m = map(lambda x: int(x), input().split(' '))
-rondas = []
 nombres = {}
 for i in range(n):
-	r = []
 	for nom in input().split(' '):
-		r.append(nom)
 		if not nom in nombres:
 			nombres[nom] = [0]*4
 		nombres[nom][i//30] |= 1<<(i%30)
-	rondas.append(r)
-
-#print (nombres)
 
 if len(nombres)>2*m:
 	print ("N")
