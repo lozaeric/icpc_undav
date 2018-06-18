@@ -1,59 +1,42 @@
 class Trie {
-	HashMap<Integer, int[]>  hijos = new HashMap<> ();
-	ArrayList<Boolean> terminables;
-	int size = 0; //incluye nodo vacio inicial
+	Node root = new Node();
 	
 	// Trie
 	// agregar O(n) , buscar O(m)
 	// genera un diccionario y busca eficientemente si existe una palabra o si es prefijo
 	
-	public Trie (String palabras[]) {
-		terminables = new ArrayList<> ();
-		crearNodo ();
-		for (String s : palabras) 
-			add (s.toCharArray ());
-	}
-	
-	void add (char[] palabra) {
-		int res[] = last (palabra), nuevo=0;
-		if (res[1]==palabra.length) {
-			terminables.set (res[0], true);
-			return;
+	void add(char word[]) {
+		Node cur = root;
+		for (char c : word) {
+			if (cur.go[c-'a'] == null)
+				cur.go[c-'a'] = new Node();
+			cur = cur.go[c-'a'];
 		}
-		for (int i=res[1],id=res[0]; i<palabra.length; i++) {
-			nuevo = crearNodo ();
-			hijos.get (id)[palabra[i]-'a'] = nuevo;
-			id = nuevo;
+		cur.term = true;
+	}
+	
+	boolean find(char word[]) {
+		Node cur = root;
+		for (char c : word) {
+			if (cur.go[c-'a'] == null)
+				return false;
+			cur = cur.go[c-'a'];
 		}
-		terminables.set (nuevo, true);
+		return cur.term;
 	}
 	
-	private int crearNodo () {
-		hijos.put (size, new int[30]);
-		terminables.add (false);
-		return size++;
-	}
-	
-	int[] last (char palabra[]) {
-		int id=0,index=0;
-		
-		for (int i=0,aux=0; i<palabra.length; i++) {
-			aux = hijos.get (id)[palabra[i]-'a'];
-			if (aux!=0) {
-				index = i+1;
-				id = aux;					
-			}
-			else
-				break;
+	boolean isPrefix(char word[]) {
+		Node cur = root;
+		for (char c : word) {
+			if (cur.go[c-'a'] == null)
+				return false;
+			cur = cur.go[c-'a'];
 		}
-		return new int[] {id,index};			
+		return true;
 	}
-	
-	boolean find (char palabra[]) {
-		int res[] = last(palabra);
-		return res[1]==palabra.length && terminables.get (res[0]);
-	}
-	boolean startWith (char palabra[]) {
-		return last(palabra)[1]==palabra.length;
-	}	
+}
+
+class Node {
+	Node go[] = new Node[26];
+	boolean term = false;
 }
