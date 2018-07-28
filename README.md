@@ -15,6 +15,7 @@
    * http://www.spoj.com
    * http://coj.uci.cu/index.xhtml
    * https://uva.onlinejudge.org
+   * http://redprogramacioncompetitiva.com
 ### Estructuras y Algoritmos:
    * http://cpbook.net/#downloads
    * https://sites.google.com/site/trainingcampargentina2016/home/clases-teoricas
