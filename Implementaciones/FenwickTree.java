@@ -1,20 +1,22 @@
-// O (log n) para suma en un rango y modificacion de un elemento
-static class Fenwick{
-	long t[];
-	Fenwick(int sz){
-		 t = new long[sz+1];
+class FenwickTree {
+	int ft[];
+	
+	// O (log n) para suma en un rango y modificacion de un elemento
+	
+	public FenwickTree (int n) { 
+		ft = new int [n+1];
 	}
-	void adjust(int p, long v){ //valid with p in [1, sz+1), O(lgn)
-		for(int i=p; i<t.length; i+=(i&-i))
-			t[i]+=v;
+	int rsq (int index) { 
+		int sum=0;
+		for (int i=index; i>0; i-=(-i&i))
+			sum += ft[i];
+		return sum;
 	}
-	long sum(int p){ //cumulative sum in [1, p], O(lgn)
-		long s=0;
-		for(int i=p; i>0; i-=(i&-i))
-			s+=t[i];
-		return s;
-	}
-	long sum(int a, int b){ //one-indexed
-		return sum(b)-sum(a-1);
-	}
+	int rsq (int i,int j) { 
+		return rsq(j)-rsq(i-1);
+	}		
+	void adjust(int index, int diff) {
+		for (int i=index; i<ft.length; i+=(-i&i)) 
+			ft[i] += diff; 
+   }
 }
